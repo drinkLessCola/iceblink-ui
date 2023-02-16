@@ -1,0 +1,489 @@
+@charset "UTF-8";
+/**
+ * 修改 CSS 变量可以修改对应的颜色: 
+ * prop: 前缀可以是 '' / 'hover' / 'active'
+ *    text-color 文字颜色
+ *    bg-color 背景颜色
+ *    border-color 边框颜色
+ *    outline-color focus-visible 的 outline 颜色
+ *    focus-border-color focus-visible 的 button 颜色
+ */
+.iceButton {
+  --ice-button-bg-color: var(--ice-fill-color-blank);
+  --ice-button-text-color: var(--ice-text-color-regular);
+  --ice-button-border-color: var(--ice-border-color);
+  --ice-button-outline-color: var(--ice-fill-color-light);
+  --ice-button-height: var(--ice-component-size-default);
+  --ice-button-hover-bg-color: var(--ice-fill-color-blank);
+  --ice-button-hover-text-color: var(--ice-color-primary);
+  --ice-button-hover-link-text-color: var(--ice-text-color-secondary);
+  --ice-button-hover-border-color: var(--ice-color-primary-light-3);
+  --ice-button-active-bg-color: var(--ice-color-primary-light-9);
+  --ice-button-active-text-color: var(--ice-color-primary);
+  --ice-button-active-link-text-color: var(--ice-text-color-primary);
+  --ice-button-active-border-color: var(--ice-color-primary-light-3);
+  --ice-button-disabled-bg-color: var(--ice-fill-color-blank);
+  --ice-button-disabled-text-color: var(--ice-text-color-disabled);
+  --ice-button-disabled-border-color: var(--ice-border-color);
+}
+.iceButton.is-plain {
+  --ice-button-text-color: var(--ice-text-color-regular);
+  --ice-button-bg-color: var(--ice-fill-color-light);
+  --ice-button-border-color: var(--ice-fill-color-light);
+  --ice-button-outline-color: var(--ice-fill-color-extra-light);
+  --ice-button-focus-border-color: var(--ice-border-color-dark);
+  --ice-button-hover-text-color: var(--ice-text-color-regular);
+  --ice-button-hover-link-text-color: var(--ice-color-primary);
+  --ice-button-hover-bg-color: var(--ice-fill-color-dark);
+  --ice-button-hover-border-color: var(--ice-fill-color-light);
+  --ice-button-active-text-color: var(--ice-text-color-regular);
+  --ice-button-active-link-text-color: var(--ice-color-primary-darker);
+  --ice-button-active-bg-color: var(--ice-fill-color-darker);
+  --ice-button-active-border-color: var(--ice-fill-color-light);
+  --ice-button-disabled-text-color: var(--ice-text-color-disabled);
+  --ice-button-disabled-bg-color: var(--ice-fill-color-lighter);
+  --ice-button-disabled-border-color: var(--ice-fill-color-lighter);
+}
+.iceButton.is-text, .iceButton.is-link {
+  --ice-button-text-color: var(--ice-text-color-regular);
+  --ice-button-bg-color: var(--ice-fill-color-light);
+  --ice-button-border-color: var(--ice-fill-color-light);
+  --ice-button-outline-color: var(--ice-fill-color-extra-light);
+  --ice-button-focus-border-color: var(--ice-border-color-dark);
+  --ice-button-hover-text-color: var(--ice-text-color-regular);
+  --ice-button-hover-link-text-color: var(--ice-color-primary);
+  --ice-button-hover-bg-color: var(--ice-fill-color-dark);
+  --ice-button-hover-border-color: var(--ice-fill-color-light);
+  --ice-button-active-text-color: var(--ice-text-color-regular);
+  --ice-button-active-link-text-color: var(--ice-color-primary-darker);
+  --ice-button-active-bg-color: var(--ice-fill-color-darker);
+  --ice-button-active-border-color: var(--ice-fill-color-light);
+  --ice-button-disabled-text-color: var(--ice-text-color-disabled);
+  --ice-button-disabled-bg-color: var(--ice-fill-color-lighter);
+  --ice-button-disabled-border-color: var(--ice-fill-color-lighter);
+}
+.iceButton.is-text.is-disabled, .iceButton.is-link.is-disabled {
+  background-color: transparent;
+  border-color: transparent;
+}
+.iceButton.is-ghost {
+  --ice-button-text-color: var(--ice-text-color-regular);
+  --ice-button-border-color: var(--ice-text-color-regular);
+  --ice-button-focus-border-color: var(--ice-text-color-regular);
+  --ice-button-outline-color: var(--ice-fill-color-light);
+  --ice-button-hover-text-color: var(--ice-text-color-secondary);
+  --ice-button-hover-border-color: var(--ice-text-color-secondary);
+  --ice-button-active-text-color: var(--ice-text-color-primary);
+  --ice-button-active-border-color: var(--ice-text-color-primary);
+}
+
+.iceButton {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--ice-button-text-color);
+  border: var(--ice-border);
+  border-color: var(--ice-button-border-color);
+  background-color: var(--ice-button-bg-color);
+  height: var(--ice-button-height);
+  transition: 0.1s;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+  outline: none;
+  font-weight: normal;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  -webkit-appearance: none;
+  padding: 8px 15px;
+  font-size: var(--ice-font-size-base);
+  border-radius: var(--ice-border-radius-base);
+  /* ====== 按钮风格 ====== */
+  /* ====== 按钮边框风格 ====== */
+}
+.iceButton:hover, .iceButton:focus {
+  color: var(--ice-button-hover-text-color);
+  border-color: var(--ice-button-hover-border-color);
+  background-color: var(--ice-button-hover-bg-color);
+  outline: none;
+}
+.iceButton:active {
+  color: var(--ice-button-active-text-color);
+  border-color: var(--ice-button-active-border-color);
+  background-color: var(--ice-button-active-bg-color);
+}
+.iceButton:focus-visible {
+  outline: 3px solid;
+  outline-color: var(--ice-button-outline-color);
+  border-color: var(--ice-button-focus-border-color);
+}
+.iceButton.is-disabled, .iceButton.is-disabled:hover, .iceButton.is-disabled:focus {
+  color: var(--ice-button-disabled-text-color);
+  cursor: not-allowed;
+  background-color: var(--ice-button-disabled-bg-color);
+  border-color: var(--ice-button-disabled-border-color);
+}
+
+.iceButton.is-plain {
+  font-weight: 500;
+  outline-color: var(--ice-button-outline-color);
+}
+
+.iceButton.is-text {
+  background-color: transparent;
+  border: 1px solid transparent;
+  outline: none;
+}
+.iceButton.is-text.is-disabled {
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.iceButton.is-text:not(.is-disabled):hover, .iceButton.is-text:not(.is-disabled):focus {
+  background-color: var(--ice-fill-color-lighter);
+}
+.iceButton.is-text:not(.is-disabled):active {
+  background-color: var(--ice-fill-color);
+}
+
+.iceButton.is-link {
+  background-color: transparent;
+  border: 1px solid transparent;
+  outline-color: var(--ice-button-outline-color);
+  padding: 5px;
+  height: auto;
+}
+.iceButton.is-link.is-disabled {
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.iceButton.is-link:not(.is-disabled):hover, .iceButton.is-link:not(.is-disabled):focus {
+  color: var(--ice-button-hover-link-text-color);
+}
+.iceButton.is-link:not(.is-disabled):active {
+  color: var(--ice-button-active-link-text-color);
+}
+
+.iceButton.is-ghost {
+  background-color: transparent;
+}
+
+.iceButton.is-border {
+  --ice-button-border-color: var(--ice-text-color-regular);
+  --ice-button-hover-border-color: var(--ice-text-color-regular);
+  --ice-button-active-border-color: var(--ice-text-color-primary);
+  --ice-button-focus-border-color: var(--ice-text-color-regular);
+}
+
+.iceButton.is-dashed {
+  border-style: dashed;
+}
+
+.iceButton.is-round {
+  border-radius: var(--ice-button-height);
+}
+
+.iceButton.is-circle {
+  width: var(--ice-button-height);
+  border-radius: var(--ice-border-radius-circle);
+  padding: 8px;
+}
+
+.iceButton-primary {
+  --ice-button-text-color: var(--ice-color-white);
+  --ice-button-bg-color: var(--ice-color-primary);
+  --ice-button-border-color: var(--ice-color-primary);
+  --ice-button-outline-color: var(--ice-color-primary-alpha);
+  --ice-button-active-color: var(--ice-color-primary-dark);
+  --ice-button-focus-border-color: var(--ice-color-primary);
+  --ice-button-hover-text-color: var(--ice-color-white);
+  --ice-button-hover-bg-color: var(--ice-color-primary-light-1);
+  --ice-button-hover-border-color: var(--ice-color-primary-light-1);
+  --ice-button-active-text-color: var(--ice-color-white);
+  --ice-button-active-bg-color: var(--ice-color-primary-dark);
+  --ice-button-active-border-color: var(--ice-color-primary-dark);
+  --ice-button-disabled-text-color: var(--ice-color-white);
+  --ice-button-disabled-bg-color: var(--ice-color-primary-light-5);
+  --ice-button-disabled-border-color: var(--ice-color-primary-light-5);
+}
+.iceButton-primary.is-plain, .iceButton-primary.is-text, .iceButton-primary.is-link {
+  --ice-button-text-color: var(--ice-color-primary);
+  --ice-button-bg-color: var(--ice-color-primary-light-8);
+  --ice-button-border-color: var(--ice-color-primary-light-8);
+  --ice-button-explicit-border-color: var(--ice-color-primary);
+  --ice-button-outline-color: var(--ice-color-primary-light-9);
+  --ice-button-focus-border-color: var(--ice-color-primary-light-5);
+  --ice-button-hover-text-color: var(--ice-color-primary);
+  --ice-button-hover-link-text-color: var(--ice-color-primary-light-3);
+  --ice-button-hover-bg-color: var(--ice-color-primary-light-7);
+  --ice-button-hover-border-color: var(--ice-color-primary-light-7);
+  --ice-button-active-text-color: var(--ice-color-primary);
+  --ice-button-active-link-text-color: var(--ice-color-primary-darker);
+  --ice-button-active-bg-color: var(--ice-color-primary-light-6);
+  --ice-button-active-border-color: var(--ice-color-primary-light-6);
+  --ice-button-disabled-text-color: var(--ice-color-primary-light-5);
+  --ice-button-disabled-bg-color: var(--ice-color-primary-light-9);
+  --ice-button-disabled-border-color: var(--ice-color-primary-light-9);
+}
+.iceButton-primary.is-border {
+  --ice-button-border-color: var(--ice-color-primary);
+  --ice-button-hover-border-color: var(--ice-color-primary);
+  --ice-button-focus-border-color: var(--ice-color-primary-light-3);
+  --ice-button-active-border-color: var(--ice-color-primary-darker);
+}
+.iceButton-primary.is-ghost {
+  --ice-button-text-color: var(--ice-color-primary);
+  --ice-button-border-color: var(--ice-color-primary-light-1);
+  --ice-button-focus-border-color: var(--ice-color-primary-light-1);
+  --ice-button-outline-color: var(--ice-color-primary-alpha);
+  --ice-button-hover-text-color: var(--ice-color-primary-light-3);
+  --ice-button-hover-border-color: var(--ice-color-primary-light-3);
+  --ice-button-active-text-color: var(--ice-color-primary-darker);
+  --ice-button-active-border-color: var(--ice-color-primary-dark);
+  --ice-button-disabled-text-color: var(--ice-color-primary-light-5);
+  --ice-button-disabled-border-color: var(--ice-color-primary-light-5);
+  --ice-button-disabled-bg-color: var(--ice-color-transparent);
+}
+
+.iceButton-success {
+  --ice-button-text-color: var(--ice-color-white);
+  --ice-button-bg-color: var(--ice-color-success);
+  --ice-button-border-color: var(--ice-color-success);
+  --ice-button-outline-color: var(--ice-color-success-alpha);
+  --ice-button-active-color: var(--ice-color-success-dark);
+  --ice-button-focus-border-color: var(--ice-color-success);
+  --ice-button-hover-text-color: var(--ice-color-white);
+  --ice-button-hover-bg-color: var(--ice-color-success-light-1);
+  --ice-button-hover-border-color: var(--ice-color-success-light-1);
+  --ice-button-active-text-color: var(--ice-color-white);
+  --ice-button-active-bg-color: var(--ice-color-success-dark);
+  --ice-button-active-border-color: var(--ice-color-success-dark);
+  --ice-button-disabled-text-color: var(--ice-color-white);
+  --ice-button-disabled-bg-color: var(--ice-color-success-light-5);
+  --ice-button-disabled-border-color: var(--ice-color-success-light-5);
+}
+.iceButton-success.is-plain, .iceButton-success.is-text, .iceButton-success.is-link {
+  --ice-button-text-color: var(--ice-color-success);
+  --ice-button-bg-color: var(--ice-color-success-light-8);
+  --ice-button-border-color: var(--ice-color-success-light-8);
+  --ice-button-explicit-border-color: var(--ice-color-success);
+  --ice-button-outline-color: var(--ice-color-success-light-9);
+  --ice-button-focus-border-color: var(--ice-color-success-light-5);
+  --ice-button-hover-text-color: var(--ice-color-success);
+  --ice-button-hover-link-text-color: var(--ice-color-success-light-3);
+  --ice-button-hover-bg-color: var(--ice-color-success-light-7);
+  --ice-button-hover-border-color: var(--ice-color-success-light-7);
+  --ice-button-active-text-color: var(--ice-color-success);
+  --ice-button-active-link-text-color: var(--ice-color-success-darker);
+  --ice-button-active-bg-color: var(--ice-color-success-light-6);
+  --ice-button-active-border-color: var(--ice-color-success-light-6);
+  --ice-button-disabled-text-color: var(--ice-color-success-light-5);
+  --ice-button-disabled-bg-color: var(--ice-color-success-light-9);
+  --ice-button-disabled-border-color: var(--ice-color-success-light-9);
+}
+.iceButton-success.is-border {
+  --ice-button-border-color: var(--ice-color-success);
+  --ice-button-hover-border-color: var(--ice-color-success);
+  --ice-button-focus-border-color: var(--ice-color-success-light-3);
+  --ice-button-active-border-color: var(--ice-color-success-darker);
+}
+.iceButton-success.is-ghost {
+  --ice-button-text-color: var(--ice-color-success);
+  --ice-button-border-color: var(--ice-color-success-light-1);
+  --ice-button-focus-border-color: var(--ice-color-success-light-1);
+  --ice-button-outline-color: var(--ice-color-success-alpha);
+  --ice-button-hover-text-color: var(--ice-color-success-light-3);
+  --ice-button-hover-border-color: var(--ice-color-success-light-3);
+  --ice-button-active-text-color: var(--ice-color-success-darker);
+  --ice-button-active-border-color: var(--ice-color-success-dark);
+  --ice-button-disabled-text-color: var(--ice-color-success-light-5);
+  --ice-button-disabled-border-color: var(--ice-color-success-light-5);
+  --ice-button-disabled-bg-color: var(--ice-color-transparent);
+}
+
+.iceButton-warning {
+  --ice-button-text-color: var(--ice-color-white);
+  --ice-button-bg-color: var(--ice-color-warning);
+  --ice-button-border-color: var(--ice-color-warning);
+  --ice-button-outline-color: var(--ice-color-warning-alpha);
+  --ice-button-active-color: var(--ice-color-warning-dark);
+  --ice-button-focus-border-color: var(--ice-color-warning);
+  --ice-button-hover-text-color: var(--ice-color-white);
+  --ice-button-hover-bg-color: var(--ice-color-warning-light-1);
+  --ice-button-hover-border-color: var(--ice-color-warning-light-1);
+  --ice-button-active-text-color: var(--ice-color-white);
+  --ice-button-active-bg-color: var(--ice-color-warning-dark);
+  --ice-button-active-border-color: var(--ice-color-warning-dark);
+  --ice-button-disabled-text-color: var(--ice-color-white);
+  --ice-button-disabled-bg-color: var(--ice-color-warning-light-5);
+  --ice-button-disabled-border-color: var(--ice-color-warning-light-5);
+}
+.iceButton-warning.is-plain, .iceButton-warning.is-text, .iceButton-warning.is-link {
+  --ice-button-text-color: var(--ice-color-warning);
+  --ice-button-bg-color: var(--ice-color-warning-light-8);
+  --ice-button-border-color: var(--ice-color-warning-light-8);
+  --ice-button-explicit-border-color: var(--ice-color-warning);
+  --ice-button-outline-color: var(--ice-color-warning-light-9);
+  --ice-button-focus-border-color: var(--ice-color-warning-light-5);
+  --ice-button-hover-text-color: var(--ice-color-warning);
+  --ice-button-hover-link-text-color: var(--ice-color-warning-light-3);
+  --ice-button-hover-bg-color: var(--ice-color-warning-light-7);
+  --ice-button-hover-border-color: var(--ice-color-warning-light-7);
+  --ice-button-active-text-color: var(--ice-color-warning);
+  --ice-button-active-link-text-color: var(--ice-color-warning-darker);
+  --ice-button-active-bg-color: var(--ice-color-warning-light-6);
+  --ice-button-active-border-color: var(--ice-color-warning-light-6);
+  --ice-button-disabled-text-color: var(--ice-color-warning-light-5);
+  --ice-button-disabled-bg-color: var(--ice-color-warning-light-9);
+  --ice-button-disabled-border-color: var(--ice-color-warning-light-9);
+}
+.iceButton-warning.is-border {
+  --ice-button-border-color: var(--ice-color-warning);
+  --ice-button-hover-border-color: var(--ice-color-warning);
+  --ice-button-focus-border-color: var(--ice-color-warning-light-3);
+  --ice-button-active-border-color: var(--ice-color-warning-darker);
+}
+.iceButton-warning.is-ghost {
+  --ice-button-text-color: var(--ice-color-warning);
+  --ice-button-border-color: var(--ice-color-warning-light-1);
+  --ice-button-focus-border-color: var(--ice-color-warning-light-1);
+  --ice-button-outline-color: var(--ice-color-warning-alpha);
+  --ice-button-hover-text-color: var(--ice-color-warning-light-3);
+  --ice-button-hover-border-color: var(--ice-color-warning-light-3);
+  --ice-button-active-text-color: var(--ice-color-warning-darker);
+  --ice-button-active-border-color: var(--ice-color-warning-dark);
+  --ice-button-disabled-text-color: var(--ice-color-warning-light-5);
+  --ice-button-disabled-border-color: var(--ice-color-warning-light-5);
+  --ice-button-disabled-bg-color: var(--ice-color-transparent);
+}
+
+.iceButton-danger {
+  --ice-button-text-color: var(--ice-color-white);
+  --ice-button-bg-color: var(--ice-color-danger);
+  --ice-button-border-color: var(--ice-color-danger);
+  --ice-button-outline-color: var(--ice-color-danger-alpha);
+  --ice-button-active-color: var(--ice-color-danger-dark);
+  --ice-button-focus-border-color: var(--ice-color-danger);
+  --ice-button-hover-text-color: var(--ice-color-white);
+  --ice-button-hover-bg-color: var(--ice-color-danger-light-1);
+  --ice-button-hover-border-color: var(--ice-color-danger-light-1);
+  --ice-button-active-text-color: var(--ice-color-white);
+  --ice-button-active-bg-color: var(--ice-color-danger-dark);
+  --ice-button-active-border-color: var(--ice-color-danger-dark);
+  --ice-button-disabled-text-color: var(--ice-color-white);
+  --ice-button-disabled-bg-color: var(--ice-color-danger-light-5);
+  --ice-button-disabled-border-color: var(--ice-color-danger-light-5);
+}
+.iceButton-danger.is-plain, .iceButton-danger.is-text, .iceButton-danger.is-link {
+  --ice-button-text-color: var(--ice-color-danger);
+  --ice-button-bg-color: var(--ice-color-danger-light-8);
+  --ice-button-border-color: var(--ice-color-danger-light-8);
+  --ice-button-explicit-border-color: var(--ice-color-danger);
+  --ice-button-outline-color: var(--ice-color-danger-light-9);
+  --ice-button-focus-border-color: var(--ice-color-danger-light-5);
+  --ice-button-hover-text-color: var(--ice-color-danger);
+  --ice-button-hover-link-text-color: var(--ice-color-danger-light-3);
+  --ice-button-hover-bg-color: var(--ice-color-danger-light-7);
+  --ice-button-hover-border-color: var(--ice-color-danger-light-7);
+  --ice-button-active-text-color: var(--ice-color-danger);
+  --ice-button-active-link-text-color: var(--ice-color-danger-darker);
+  --ice-button-active-bg-color: var(--ice-color-danger-light-6);
+  --ice-button-active-border-color: var(--ice-color-danger-light-6);
+  --ice-button-disabled-text-color: var(--ice-color-danger-light-5);
+  --ice-button-disabled-bg-color: var(--ice-color-danger-light-9);
+  --ice-button-disabled-border-color: var(--ice-color-danger-light-9);
+}
+.iceButton-danger.is-border {
+  --ice-button-border-color: var(--ice-color-danger);
+  --ice-button-hover-border-color: var(--ice-color-danger);
+  --ice-button-focus-border-color: var(--ice-color-danger-light-3);
+  --ice-button-active-border-color: var(--ice-color-danger-darker);
+}
+.iceButton-danger.is-ghost {
+  --ice-button-text-color: var(--ice-color-danger);
+  --ice-button-border-color: var(--ice-color-danger-light-1);
+  --ice-button-focus-border-color: var(--ice-color-danger-light-1);
+  --ice-button-outline-color: var(--ice-color-danger-alpha);
+  --ice-button-hover-text-color: var(--ice-color-danger-light-3);
+  --ice-button-hover-border-color: var(--ice-color-danger-light-3);
+  --ice-button-active-text-color: var(--ice-color-danger-darker);
+  --ice-button-active-border-color: var(--ice-color-danger-dark);
+  --ice-button-disabled-text-color: var(--ice-color-danger-light-5);
+  --ice-button-disabled-border-color: var(--ice-color-danger-light-5);
+  --ice-button-disabled-bg-color: var(--ice-color-transparent);
+}
+
+.iceButton-info {
+  --ice-button-text-color: var(--ice-color-white);
+  --ice-button-bg-color: var(--ice-color-info);
+  --ice-button-border-color: var(--ice-color-info);
+  --ice-button-outline-color: var(--ice-color-info-alpha);
+  --ice-button-active-color: var(--ice-color-info-dark);
+  --ice-button-focus-border-color: var(--ice-color-info);
+  --ice-button-hover-text-color: var(--ice-color-white);
+  --ice-button-hover-bg-color: var(--ice-color-info-light-1);
+  --ice-button-hover-border-color: var(--ice-color-info-light-1);
+  --ice-button-active-text-color: var(--ice-color-white);
+  --ice-button-active-bg-color: var(--ice-color-info-dark);
+  --ice-button-active-border-color: var(--ice-color-info-dark);
+  --ice-button-disabled-text-color: var(--ice-color-white);
+  --ice-button-disabled-bg-color: var(--ice-color-info-light-5);
+  --ice-button-disabled-border-color: var(--ice-color-info-light-5);
+}
+.iceButton-info.is-plain, .iceButton-info.is-text, .iceButton-info.is-link {
+  --ice-button-text-color: var(--ice-color-info);
+  --ice-button-bg-color: var(--ice-color-info-light-8);
+  --ice-button-border-color: var(--ice-color-info-light-8);
+  --ice-button-explicit-border-color: var(--ice-color-info);
+  --ice-button-outline-color: var(--ice-color-info-light-9);
+  --ice-button-focus-border-color: var(--ice-color-info-light-5);
+  --ice-button-hover-text-color: var(--ice-color-info);
+  --ice-button-hover-link-text-color: var(--ice-color-info-light-3);
+  --ice-button-hover-bg-color: var(--ice-color-info-light-7);
+  --ice-button-hover-border-color: var(--ice-color-info-light-7);
+  --ice-button-active-text-color: var(--ice-color-info);
+  --ice-button-active-link-text-color: var(--ice-color-info-darker);
+  --ice-button-active-bg-color: var(--ice-color-info-light-6);
+  --ice-button-active-border-color: var(--ice-color-info-light-6);
+  --ice-button-disabled-text-color: var(--ice-color-info-light-5);
+  --ice-button-disabled-bg-color: var(--ice-color-info-light-9);
+  --ice-button-disabled-border-color: var(--ice-color-info-light-9);
+}
+.iceButton-info.is-border {
+  --ice-button-border-color: var(--ice-color-info);
+  --ice-button-hover-border-color: var(--ice-color-info);
+  --ice-button-focus-border-color: var(--ice-color-info-light-3);
+  --ice-button-active-border-color: var(--ice-color-info-darker);
+}
+.iceButton-info.is-ghost {
+  --ice-button-text-color: var(--ice-color-info);
+  --ice-button-border-color: var(--ice-color-info-light-1);
+  --ice-button-focus-border-color: var(--ice-color-info-light-1);
+  --ice-button-outline-color: var(--ice-color-info-alpha);
+  --ice-button-hover-text-color: var(--ice-color-info-light-3);
+  --ice-button-hover-border-color: var(--ice-color-info-light-3);
+  --ice-button-active-text-color: var(--ice-color-info-darker);
+  --ice-button-active-border-color: var(--ice-color-info-dark);
+  --ice-button-disabled-text-color: var(--ice-color-info-light-5);
+  --ice-button-disabled-border-color: var(--ice-color-info-light-5);
+  --ice-button-disabled-bg-color: var(--ice-color-transparent);
+}
+
+.iceButton-large {
+  --ice-button-height: var(--ice-component-size-large);
+  padding: 11px 19px;
+  font-size: var(--ice-font-size-base);
+  border-radius: var(--ice-border-radius-base);
+}
+
+.iceButton-small {
+  --ice-button-height: var(--ice-component-size-small);
+  padding: 5px 11px;
+  font-size: 12px;
+  border-radius: var(--ice-border-radius-base);
+}/*# sourceMappingURL=button.css.map */

@@ -1,0 +1,43 @@
+@use 'mixins/mixins' as *;
+@use 'mixins/var' as *;
+@use 'mixins/function' as *;
+@use 'common/size' as *;
+
+@keyframes rotating {
+  0% {
+    transform: rotateZ(0deg);
+  }
+
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+@include b(icon) {
+  --icon-color: inherit;
+  // <i> 标签 display 属性默认为 inline
+  // 设置 height 和 width 将不起作用
+  display:inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  height: 1em;
+  width: 1em;
+  line-height: 1em;
+
+  color: var(--icon-color);
+  fill: currentColor;
+  font-size: inherit;
+  font-size: var(--ice-icon-size);
+
+  svg {
+    width: 1em;
+    height: 1em;
+  }
+
+  // .is-loading
+  @include when(loading) {
+    animation: rotating 2s linear infinite;
+  }
+}

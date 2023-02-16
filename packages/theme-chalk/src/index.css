@@ -1,0 +1,633 @@
+@charset "UTF-8";
+/**
+ * 修改 CSS 变量可以修改对应的颜色: 
+ * prop: 前缀可以是 '' / 'hover' / 'active'
+ *    text-color 文字颜色
+ *    bg-color 背景颜色
+ *    border-color 边框颜色
+ *    outline-color focus-visible 的 outline 颜色
+ *    focus-border-color focus-visible 的 button 颜色
+ */
+.iceButton {
+  --ice-button-bg-color: var(--ice-fill-color-blank);
+  --ice-button-text-color: var(--ice-text-color-regular);
+  --ice-button-border-color: var(--ice-border-color);
+  --ice-button-outline-color: var(--ice-fill-color-light);
+  --ice-button-height: var(--ice-component-size-default);
+  --ice-button-hover-bg-color: var(--ice-fill-color-blank);
+  --ice-button-hover-text-color: var(--ice-color-primary);
+  --ice-button-hover-link-text-color: var(--ice-text-color-secondary);
+  --ice-button-hover-border-color: var(--ice-color-primary-light-3);
+  --ice-button-active-bg-color: var(--ice-color-primary-light-9);
+  --ice-button-active-text-color: var(--ice-color-primary);
+  --ice-button-active-link-text-color: var(--ice-text-color-primary);
+  --ice-button-active-border-color: var(--ice-color-primary-light-3);
+  --ice-button-disabled-bg-color: var(--ice-fill-color-blank);
+  --ice-button-disabled-text-color: var(--ice-text-color-disabled);
+  --ice-button-disabled-border-color: var(--ice-border-color);
+}
+.iceButton.is-plain {
+  --ice-button-text-color: var(--ice-text-color-regular);
+  --ice-button-bg-color: var(--ice-fill-color-light);
+  --ice-button-border-color: var(--ice-fill-color-light);
+  --ice-button-outline-color: var(--ice-fill-color-extra-light);
+  --ice-button-focus-border-color: var(--ice-border-color-dark);
+  --ice-button-hover-text-color: var(--ice-text-color-regular);
+  --ice-button-hover-link-text-color: var(--ice-color-primary);
+  --ice-button-hover-bg-color: var(--ice-fill-color-dark);
+  --ice-button-hover-border-color: var(--ice-fill-color-light);
+  --ice-button-active-text-color: var(--ice-text-color-regular);
+  --ice-button-active-link-text-color: var(--ice-color-primary-darker);
+  --ice-button-active-bg-color: var(--ice-fill-color-darker);
+  --ice-button-active-border-color: var(--ice-fill-color-light);
+  --ice-button-disabled-text-color: var(--ice-text-color-disabled);
+  --ice-button-disabled-bg-color: var(--ice-fill-color-lighter);
+  --ice-button-disabled-border-color: var(--ice-fill-color-lighter);
+}
+.iceButton.is-text, .iceButton.is-link {
+  --ice-button-text-color: var(--ice-text-color-regular);
+  --ice-button-bg-color: var(--ice-fill-color-light);
+  --ice-button-border-color: var(--ice-fill-color-light);
+  --ice-button-outline-color: var(--ice-fill-color-extra-light);
+  --ice-button-focus-border-color: var(--ice-border-color-dark);
+  --ice-button-hover-text-color: var(--ice-text-color-regular);
+  --ice-button-hover-link-text-color: var(--ice-color-primary);
+  --ice-button-hover-bg-color: var(--ice-fill-color-dark);
+  --ice-button-hover-border-color: var(--ice-fill-color-light);
+  --ice-button-active-text-color: var(--ice-text-color-regular);
+  --ice-button-active-link-text-color: var(--ice-color-primary-darker);
+  --ice-button-active-bg-color: var(--ice-fill-color-darker);
+  --ice-button-active-border-color: var(--ice-fill-color-light);
+  --ice-button-disabled-text-color: var(--ice-text-color-disabled);
+  --ice-button-disabled-bg-color: var(--ice-fill-color-lighter);
+  --ice-button-disabled-border-color: var(--ice-fill-color-lighter);
+}
+.iceButton.is-text.is-disabled, .iceButton.is-link.is-disabled {
+  background-color: transparent;
+  border-color: transparent;
+}
+.iceButton.is-ghost {
+  --ice-button-text-color: var(--ice-text-color-regular);
+  --ice-button-border-color: var(--ice-text-color-regular);
+  --ice-button-focus-border-color: var(--ice-text-color-regular);
+  --ice-button-outline-color: var(--ice-fill-color-light);
+  --ice-button-hover-text-color: var(--ice-text-color-secondary);
+  --ice-button-hover-border-color: var(--ice-text-color-secondary);
+  --ice-button-active-text-color: var(--ice-text-color-primary);
+  --ice-button-active-border-color: var(--ice-text-color-primary);
+}
+
+.iceButton {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--ice-button-text-color);
+  border: var(--ice-border);
+  border-color: var(--ice-button-border-color);
+  background-color: var(--ice-button-bg-color);
+  height: var(--ice-button-height);
+  transition: 0.1s;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+  outline: none;
+  font-weight: normal;
+  user-select: none;
+  -webkit-appearance: none;
+  padding: 8px 15px;
+  font-size: var(--ice-font-size-base);
+  border-radius: var(--ice-border-radius-base);
+  --ice-icon-size: var(--ice-font-size-medium);
+  /* ====== 按钮风格 ====== */
+  /* ====== 按钮边框风格 ====== */
+}
+.iceButton:hover, .iceButton:focus {
+  color: var(--ice-button-hover-text-color);
+  border-color: var(--ice-button-hover-border-color);
+  background-color: var(--ice-button-hover-bg-color);
+  outline: none;
+}
+.iceButton:active {
+  color: var(--ice-button-active-text-color);
+  border-color: var(--ice-button-active-border-color);
+  background-color: var(--ice-button-active-bg-color);
+}
+.iceButton:focus-visible {
+  outline: 3px solid;
+  outline-color: var(--ice-button-outline-color);
+  border-color: var(--ice-button-focus-border-color);
+}
+.iceButton.is-disabled, .iceButton.is-disabled:hover, .iceButton.is-disabled:focus {
+  color: var(--ice-button-disabled-text-color);
+  cursor: not-allowed;
+  background-color: var(--ice-button-disabled-bg-color);
+  border-color: var(--ice-button-disabled-border-color);
+}
+
+.iceButton.is-plain {
+  outline-color: var(--ice-button-outline-color);
+}
+
+.iceButton.is-text {
+  background-color: transparent;
+  border: 1px solid transparent;
+  outline: none;
+}
+.iceButton.is-text.is-disabled {
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.iceButton.is-text:not(.is-disabled):hover, .iceButton.is-text:not(.is-disabled):focus {
+  background-color: var(--ice-fill-color-lighter);
+}
+.iceButton.is-text:not(.is-disabled):active {
+  background-color: var(--ice-fill-color);
+}
+
+.iceButton.is-link {
+  background-color: transparent;
+  border: 1px solid transparent;
+  outline-color: var(--ice-button-outline-color);
+  padding: 5px;
+  height: auto;
+}
+.iceButton.is-link.is-disabled {
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.iceButton.is-link:not(.is-disabled):hover, .iceButton.is-link:not(.is-disabled):focus {
+  color: var(--ice-button-hover-link-text-color);
+}
+.iceButton.is-link:not(.is-disabled):active {
+  color: var(--ice-button-active-link-text-color);
+}
+
+.iceButton.is-ghost {
+  background-color: transparent;
+}
+
+.iceButton.is-border {
+  --ice-button-border-color: var(--ice-text-color-regular);
+  --ice-button-hover-border-color: var(--ice-text-color-regular);
+  --ice-button-active-border-color: var(--ice-text-color-primary);
+  --ice-button-focus-border-color: var(--ice-text-color-regular);
+}
+
+.iceButton.is-dashed {
+  border-style: dashed;
+}
+
+.iceButton.is-round {
+  border-radius: var(--ice-button-height);
+}
+
+.iceButton.is-circle {
+  width: var(--ice-button-height);
+  border-radius: var(--ice-border-radius-circle);
+  padding: 8px;
+}
+
+.iceButton-primary {
+  --ice-button-text-color: var(--ice-color-white);
+  --ice-button-bg-color: var(--ice-color-primary);
+  --ice-button-border-color: var(--ice-color-primary);
+  --ice-button-outline-color: var(--ice-color-primary-alpha);
+  --ice-button-active-color: var(--ice-color-primary-dark);
+  --ice-button-focus-border-color: var(--ice-color-primary);
+  --ice-button-hover-text-color: var(--ice-color-white);
+  --ice-button-hover-bg-color: var(--ice-color-primary-light-1);
+  --ice-button-hover-border-color: var(--ice-color-primary-light-1);
+  --ice-button-active-text-color: var(--ice-color-white);
+  --ice-button-active-bg-color: var(--ice-color-primary-dark);
+  --ice-button-active-border-color: var(--ice-color-primary-dark);
+  --ice-button-disabled-text-color: var(--ice-color-white);
+  --ice-button-disabled-bg-color: var(--ice-color-primary-light-5);
+  --ice-button-disabled-border-color: var(--ice-color-primary-light-5);
+}
+.iceButton-primary.is-plain, .iceButton-primary.is-text, .iceButton-primary.is-link {
+  --ice-button-text-color: var(--ice-color-primary);
+  --ice-button-bg-color: var(--ice-color-primary-light-8);
+  --ice-button-border-color: var(--ice-color-primary-light-8);
+  --ice-button-explicit-border-color: var(--ice-color-primary);
+  --ice-button-outline-color: var(--ice-color-primary-light-9);
+  --ice-button-focus-border-color: var(--ice-color-primary-light-5);
+  --ice-button-hover-text-color: var(--ice-color-primary);
+  --ice-button-hover-link-text-color: var(--ice-color-primary-light-3);
+  --ice-button-hover-bg-color: var(--ice-color-primary-light-7);
+  --ice-button-hover-border-color: var(--ice-color-primary-light-7);
+  --ice-button-active-text-color: var(--ice-color-primary);
+  --ice-button-active-link-text-color: var(--ice-color-primary-darker);
+  --ice-button-active-bg-color: var(--ice-color-primary-light-6);
+  --ice-button-active-border-color: var(--ice-color-primary-light-6);
+  --ice-button-disabled-text-color: var(--ice-color-primary-light-5);
+  --ice-button-disabled-bg-color: var(--ice-color-primary-light-9);
+  --ice-button-disabled-border-color: var(--ice-color-primary-light-9);
+}
+.iceButton-primary.is-border {
+  --ice-button-border-color: var(--ice-color-primary);
+  --ice-button-hover-border-color: var(--ice-color-primary);
+  --ice-button-focus-border-color: var(--ice-color-primary-light-3);
+  --ice-button-active-border-color: var(--ice-color-primary-darker);
+}
+.iceButton-primary.is-ghost {
+  --ice-button-text-color: var(--ice-color-primary);
+  --ice-button-border-color: var(--ice-color-primary-light-1);
+  --ice-button-focus-border-color: var(--ice-color-primary-light-1);
+  --ice-button-outline-color: var(--ice-color-primary-alpha);
+  --ice-button-hover-text-color: var(--ice-color-primary-light-3);
+  --ice-button-hover-border-color: var(--ice-color-primary-light-3);
+  --ice-button-active-text-color: var(--ice-color-primary-darker);
+  --ice-button-active-border-color: var(--ice-color-primary-dark);
+  --ice-button-disabled-text-color: var(--ice-color-primary-light-5);
+  --ice-button-disabled-border-color: var(--ice-color-primary-light-5);
+  --ice-button-disabled-bg-color: var(--ice-color-transparent);
+}
+
+.iceButton-success {
+  --ice-button-text-color: var(--ice-color-white);
+  --ice-button-bg-color: var(--ice-color-success);
+  --ice-button-border-color: var(--ice-color-success);
+  --ice-button-outline-color: var(--ice-color-success-alpha);
+  --ice-button-active-color: var(--ice-color-success-dark);
+  --ice-button-focus-border-color: var(--ice-color-success);
+  --ice-button-hover-text-color: var(--ice-color-white);
+  --ice-button-hover-bg-color: var(--ice-color-success-light-1);
+  --ice-button-hover-border-color: var(--ice-color-success-light-1);
+  --ice-button-active-text-color: var(--ice-color-white);
+  --ice-button-active-bg-color: var(--ice-color-success-dark);
+  --ice-button-active-border-color: var(--ice-color-success-dark);
+  --ice-button-disabled-text-color: var(--ice-color-white);
+  --ice-button-disabled-bg-color: var(--ice-color-success-light-5);
+  --ice-button-disabled-border-color: var(--ice-color-success-light-5);
+}
+.iceButton-success.is-plain, .iceButton-success.is-text, .iceButton-success.is-link {
+  --ice-button-text-color: var(--ice-color-success);
+  --ice-button-bg-color: var(--ice-color-success-light-8);
+  --ice-button-border-color: var(--ice-color-success-light-8);
+  --ice-button-explicit-border-color: var(--ice-color-success);
+  --ice-button-outline-color: var(--ice-color-success-light-9);
+  --ice-button-focus-border-color: var(--ice-color-success-light-5);
+  --ice-button-hover-text-color: var(--ice-color-success);
+  --ice-button-hover-link-text-color: var(--ice-color-success-light-3);
+  --ice-button-hover-bg-color: var(--ice-color-success-light-7);
+  --ice-button-hover-border-color: var(--ice-color-success-light-7);
+  --ice-button-active-text-color: var(--ice-color-success);
+  --ice-button-active-link-text-color: var(--ice-color-success-darker);
+  --ice-button-active-bg-color: var(--ice-color-success-light-6);
+  --ice-button-active-border-color: var(--ice-color-success-light-6);
+  --ice-button-disabled-text-color: var(--ice-color-success-light-5);
+  --ice-button-disabled-bg-color: var(--ice-color-success-light-9);
+  --ice-button-disabled-border-color: var(--ice-color-success-light-9);
+}
+.iceButton-success.is-border {
+  --ice-button-border-color: var(--ice-color-success);
+  --ice-button-hover-border-color: var(--ice-color-success);
+  --ice-button-focus-border-color: var(--ice-color-success-light-3);
+  --ice-button-active-border-color: var(--ice-color-success-darker);
+}
+.iceButton-success.is-ghost {
+  --ice-button-text-color: var(--ice-color-success);
+  --ice-button-border-color: var(--ice-color-success-light-1);
+  --ice-button-focus-border-color: var(--ice-color-success-light-1);
+  --ice-button-outline-color: var(--ice-color-success-alpha);
+  --ice-button-hover-text-color: var(--ice-color-success-light-3);
+  --ice-button-hover-border-color: var(--ice-color-success-light-3);
+  --ice-button-active-text-color: var(--ice-color-success-darker);
+  --ice-button-active-border-color: var(--ice-color-success-dark);
+  --ice-button-disabled-text-color: var(--ice-color-success-light-5);
+  --ice-button-disabled-border-color: var(--ice-color-success-light-5);
+  --ice-button-disabled-bg-color: var(--ice-color-transparent);
+}
+
+.iceButton-warning {
+  --ice-button-text-color: var(--ice-color-white);
+  --ice-button-bg-color: var(--ice-color-warning);
+  --ice-button-border-color: var(--ice-color-warning);
+  --ice-button-outline-color: var(--ice-color-warning-alpha);
+  --ice-button-active-color: var(--ice-color-warning-dark);
+  --ice-button-focus-border-color: var(--ice-color-warning);
+  --ice-button-hover-text-color: var(--ice-color-white);
+  --ice-button-hover-bg-color: var(--ice-color-warning-light-1);
+  --ice-button-hover-border-color: var(--ice-color-warning-light-1);
+  --ice-button-active-text-color: var(--ice-color-white);
+  --ice-button-active-bg-color: var(--ice-color-warning-dark);
+  --ice-button-active-border-color: var(--ice-color-warning-dark);
+  --ice-button-disabled-text-color: var(--ice-color-white);
+  --ice-button-disabled-bg-color: var(--ice-color-warning-light-5);
+  --ice-button-disabled-border-color: var(--ice-color-warning-light-5);
+}
+.iceButton-warning.is-plain, .iceButton-warning.is-text, .iceButton-warning.is-link {
+  --ice-button-text-color: var(--ice-color-warning);
+  --ice-button-bg-color: var(--ice-color-warning-light-8);
+  --ice-button-border-color: var(--ice-color-warning-light-8);
+  --ice-button-explicit-border-color: var(--ice-color-warning);
+  --ice-button-outline-color: var(--ice-color-warning-light-9);
+  --ice-button-focus-border-color: var(--ice-color-warning-light-5);
+  --ice-button-hover-text-color: var(--ice-color-warning);
+  --ice-button-hover-link-text-color: var(--ice-color-warning-light-3);
+  --ice-button-hover-bg-color: var(--ice-color-warning-light-7);
+  --ice-button-hover-border-color: var(--ice-color-warning-light-7);
+  --ice-button-active-text-color: var(--ice-color-warning);
+  --ice-button-active-link-text-color: var(--ice-color-warning-darker);
+  --ice-button-active-bg-color: var(--ice-color-warning-light-6);
+  --ice-button-active-border-color: var(--ice-color-warning-light-6);
+  --ice-button-disabled-text-color: var(--ice-color-warning-light-5);
+  --ice-button-disabled-bg-color: var(--ice-color-warning-light-9);
+  --ice-button-disabled-border-color: var(--ice-color-warning-light-9);
+}
+.iceButton-warning.is-border {
+  --ice-button-border-color: var(--ice-color-warning);
+  --ice-button-hover-border-color: var(--ice-color-warning);
+  --ice-button-focus-border-color: var(--ice-color-warning-light-3);
+  --ice-button-active-border-color: var(--ice-color-warning-darker);
+}
+.iceButton-warning.is-ghost {
+  --ice-button-text-color: var(--ice-color-warning);
+  --ice-button-border-color: var(--ice-color-warning-light-1);
+  --ice-button-focus-border-color: var(--ice-color-warning-light-1);
+  --ice-button-outline-color: var(--ice-color-warning-alpha);
+  --ice-button-hover-text-color: var(--ice-color-warning-light-3);
+  --ice-button-hover-border-color: var(--ice-color-warning-light-3);
+  --ice-button-active-text-color: var(--ice-color-warning-darker);
+  --ice-button-active-border-color: var(--ice-color-warning-dark);
+  --ice-button-disabled-text-color: var(--ice-color-warning-light-5);
+  --ice-button-disabled-border-color: var(--ice-color-warning-light-5);
+  --ice-button-disabled-bg-color: var(--ice-color-transparent);
+}
+
+.iceButton-danger {
+  --ice-button-text-color: var(--ice-color-white);
+  --ice-button-bg-color: var(--ice-color-danger);
+  --ice-button-border-color: var(--ice-color-danger);
+  --ice-button-outline-color: var(--ice-color-danger-alpha);
+  --ice-button-active-color: var(--ice-color-danger-dark);
+  --ice-button-focus-border-color: var(--ice-color-danger);
+  --ice-button-hover-text-color: var(--ice-color-white);
+  --ice-button-hover-bg-color: var(--ice-color-danger-light-1);
+  --ice-button-hover-border-color: var(--ice-color-danger-light-1);
+  --ice-button-active-text-color: var(--ice-color-white);
+  --ice-button-active-bg-color: var(--ice-color-danger-dark);
+  --ice-button-active-border-color: var(--ice-color-danger-dark);
+  --ice-button-disabled-text-color: var(--ice-color-white);
+  --ice-button-disabled-bg-color: var(--ice-color-danger-light-5);
+  --ice-button-disabled-border-color: var(--ice-color-danger-light-5);
+}
+.iceButton-danger.is-plain, .iceButton-danger.is-text, .iceButton-danger.is-link {
+  --ice-button-text-color: var(--ice-color-danger);
+  --ice-button-bg-color: var(--ice-color-danger-light-8);
+  --ice-button-border-color: var(--ice-color-danger-light-8);
+  --ice-button-explicit-border-color: var(--ice-color-danger);
+  --ice-button-outline-color: var(--ice-color-danger-light-9);
+  --ice-button-focus-border-color: var(--ice-color-danger-light-5);
+  --ice-button-hover-text-color: var(--ice-color-danger);
+  --ice-button-hover-link-text-color: var(--ice-color-danger-light-3);
+  --ice-button-hover-bg-color: var(--ice-color-danger-light-7);
+  --ice-button-hover-border-color: var(--ice-color-danger-light-7);
+  --ice-button-active-text-color: var(--ice-color-danger);
+  --ice-button-active-link-text-color: var(--ice-color-danger-darker);
+  --ice-button-active-bg-color: var(--ice-color-danger-light-6);
+  --ice-button-active-border-color: var(--ice-color-danger-light-6);
+  --ice-button-disabled-text-color: var(--ice-color-danger-light-5);
+  --ice-button-disabled-bg-color: var(--ice-color-danger-light-9);
+  --ice-button-disabled-border-color: var(--ice-color-danger-light-9);
+}
+.iceButton-danger.is-border {
+  --ice-button-border-color: var(--ice-color-danger);
+  --ice-button-hover-border-color: var(--ice-color-danger);
+  --ice-button-focus-border-color: var(--ice-color-danger-light-3);
+  --ice-button-active-border-color: var(--ice-color-danger-darker);
+}
+.iceButton-danger.is-ghost {
+  --ice-button-text-color: var(--ice-color-danger);
+  --ice-button-border-color: var(--ice-color-danger-light-1);
+  --ice-button-focus-border-color: var(--ice-color-danger-light-1);
+  --ice-button-outline-color: var(--ice-color-danger-alpha);
+  --ice-button-hover-text-color: var(--ice-color-danger-light-3);
+  --ice-button-hover-border-color: var(--ice-color-danger-light-3);
+  --ice-button-active-text-color: var(--ice-color-danger-darker);
+  --ice-button-active-border-color: var(--ice-color-danger-dark);
+  --ice-button-disabled-text-color: var(--ice-color-danger-light-5);
+  --ice-button-disabled-border-color: var(--ice-color-danger-light-5);
+  --ice-button-disabled-bg-color: var(--ice-color-transparent);
+}
+
+.iceButton-info {
+  --ice-button-text-color: var(--ice-color-white);
+  --ice-button-bg-color: var(--ice-color-info);
+  --ice-button-border-color: var(--ice-color-info);
+  --ice-button-outline-color: var(--ice-color-info-alpha);
+  --ice-button-active-color: var(--ice-color-info-dark);
+  --ice-button-focus-border-color: var(--ice-color-info);
+  --ice-button-hover-text-color: var(--ice-color-white);
+  --ice-button-hover-bg-color: var(--ice-color-info-light-1);
+  --ice-button-hover-border-color: var(--ice-color-info-light-1);
+  --ice-button-active-text-color: var(--ice-color-white);
+  --ice-button-active-bg-color: var(--ice-color-info-dark);
+  --ice-button-active-border-color: var(--ice-color-info-dark);
+  --ice-button-disabled-text-color: var(--ice-color-white);
+  --ice-button-disabled-bg-color: var(--ice-color-info-light-5);
+  --ice-button-disabled-border-color: var(--ice-color-info-light-5);
+}
+.iceButton-info.is-plain, .iceButton-info.is-text, .iceButton-info.is-link {
+  --ice-button-text-color: var(--ice-color-info);
+  --ice-button-bg-color: var(--ice-color-info-light-8);
+  --ice-button-border-color: var(--ice-color-info-light-8);
+  --ice-button-explicit-border-color: var(--ice-color-info);
+  --ice-button-outline-color: var(--ice-color-info-light-9);
+  --ice-button-focus-border-color: var(--ice-color-info-light-5);
+  --ice-button-hover-text-color: var(--ice-color-info);
+  --ice-button-hover-link-text-color: var(--ice-color-info-light-3);
+  --ice-button-hover-bg-color: var(--ice-color-info-light-7);
+  --ice-button-hover-border-color: var(--ice-color-info-light-7);
+  --ice-button-active-text-color: var(--ice-color-info);
+  --ice-button-active-link-text-color: var(--ice-color-info-darker);
+  --ice-button-active-bg-color: var(--ice-color-info-light-6);
+  --ice-button-active-border-color: var(--ice-color-info-light-6);
+  --ice-button-disabled-text-color: var(--ice-color-info-light-5);
+  --ice-button-disabled-bg-color: var(--ice-color-info-light-9);
+  --ice-button-disabled-border-color: var(--ice-color-info-light-9);
+}
+.iceButton-info.is-border {
+  --ice-button-border-color: var(--ice-color-info);
+  --ice-button-hover-border-color: var(--ice-color-info);
+  --ice-button-focus-border-color: var(--ice-color-info-light-3);
+  --ice-button-active-border-color: var(--ice-color-info-darker);
+}
+.iceButton-info.is-ghost {
+  --ice-button-text-color: var(--ice-color-info);
+  --ice-button-border-color: var(--ice-color-info-light-1);
+  --ice-button-focus-border-color: var(--ice-color-info-light-1);
+  --ice-button-outline-color: var(--ice-color-info-alpha);
+  --ice-button-hover-text-color: var(--ice-color-info-light-3);
+  --ice-button-hover-border-color: var(--ice-color-info-light-3);
+  --ice-button-active-text-color: var(--ice-color-info-darker);
+  --ice-button-active-border-color: var(--ice-color-info-dark);
+  --ice-button-disabled-text-color: var(--ice-color-info-light-5);
+  --ice-button-disabled-border-color: var(--ice-color-info-light-5);
+  --ice-button-disabled-bg-color: var(--ice-color-transparent);
+}
+
+.iceButton [class*=iceIcon] + span {
+  margin-left: 6px;
+}
+.iceButton [class*=iceIcon] svg {
+  vertical-align: bottom;
+}
+.iceButton-large {
+  --ice-button-height: var(--ice-component-size-large);
+  padding: 9px 19px;
+  font-size: var(--ice-font-size-medium);
+  border-radius: var(--ice-border-radius-base);
+  --ice-icon-size: var(--ice-font-size-large);
+}
+
+.iceButton-small {
+  --ice-button-height: var(--ice-component-size-small);
+  padding: 7px 11px;
+  font-size: var(--ice-font-size-extra-small);
+  border-radius: var(--ice-border-radius-base);
+  --ice-icon-size: var(--ice-font-size-base);
+}
+
+@keyframes rotating {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+.iceIcon {
+  --icon-color: inherit;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 1em;
+  width: 1em;
+  line-height: 1em;
+  color: var(--icon-color);
+  fill: currentColor;
+  font-size: inherit;
+  font-size: var(--ice-icon-size);
+}
+.iceIcon svg {
+  width: 1em;
+  height: 1em;
+}
+.iceIcon.is-loading {
+  animation: rotating 2s linear infinite;
+}
+
+:root {
+  --ice-color-white: #ffffff;
+  --ice-color-black: #000000;
+  --ice-color-transparent: transparent;
+  --ice-color-primary: #fe7961;
+  --ice-color-primary-alpha: rgba(254, 121, 97, 0.4);
+  --ice-color-primary-dark: #fe7454;
+  --ice-color-primary-darker: #e54c2a;
+  --ice-color-primary-light-1: #fe8671;
+  --ice-color-primary-light-3: #fea190;
+  --ice-color-primary-light-5: #ffbcb0;
+  --ice-color-primary-light-6: #ffc9c0;
+  --ice-color-primary-light-7: #ffd7d0;
+  --ice-color-primary-light-8: #ffe4df;
+  --ice-color-primary-light-9: #fff2ef;
+  --ice-color-success: #2eb876;
+  --ice-color-success-alpha: rgba(46, 184, 118, 0.4);
+  --ice-color-success-dark: #25b877;
+  --ice-color-success-darker: #089f5c;
+  --ice-color-success-light-1: #43bf84;
+  --ice-color-success-light-3: #6dcd9f;
+  --ice-color-success-light-5: #97dcbb;
+  --ice-color-success-light-6: #abe3c8;
+  --ice-color-success-light-7: #c0ead6;
+  --ice-color-success-light-8: #d5f1e4;
+  --ice-color-success-light-9: #eaf8f1;
+  --ice-color-warning: #fdb124;
+  --ice-color-warning-alpha: rgba(253, 177, 36, 0.4);
+  --ice-color-warning-dark: #fdb417;
+  --ice-color-warning-darker: #e49b00;
+  --ice-color-warning-light-1: #fdb93a;
+  --ice-color-warning-light-3: #fec866;
+  --ice-color-warning-light-5: #fed892;
+  --ice-color-warning-light-6: #fee0a7;
+  --ice-color-warning-light-7: #fee8bd;
+  --ice-color-warning-light-8: #ffefd3;
+  --ice-color-warning-light-9: #fff7e9;
+  --ice-color-danger: #EC524B;
+  --ice-color-danger-alpha: rgba(236, 82, 75, 0.4);
+  --ice-color-danger-dark: #ec4c3f;
+  --ice-color-danger-darker: #d32719;
+  --ice-color-danger-light-1: #ee635d;
+  --ice-color-danger-light-3: #f28681;
+  --ice-color-danger-light-5: #f6a9a5;
+  --ice-color-danger-light-6: #f7bab7;
+  --ice-color-danger-light-7: #f9cbc9;
+  --ice-color-danger-light-8: #fbdcdb;
+  --ice-color-danger-light-9: #fdeeed;
+  --ice-color-error: #fd5747;
+  --ice-color-error-alpha: rgba(253, 87, 71, 0.4);
+  --ice-color-error-dark: #fd523a;
+  --ice-color-error-darker: #e42c12;
+  --ice-color-error-light-1: #fd6859;
+  --ice-color-error-light-3: #fe897e;
+  --ice-color-error-light-5: #feaba3;
+  --ice-color-error-light-6: #febcb5;
+  --ice-color-error-light-7: #fecdc8;
+  --ice-color-error-light-8: #ffddda;
+  --ice-color-error-light-9: #ffeeed;
+  --ice-color-info: #5897fc;
+  --ice-color-info-alpha: rgba(88, 151, 252, 0.4);
+  --ice-color-info-dark: #4b89fc;
+  --ice-color-info-darker: #2265e3;
+  --ice-color-info-light-1: #69a1fc;
+  --ice-color-info-light-3: #8ab6fd;
+  --ice-color-info-light-5: #accbfe;
+  --ice-color-info-light-6: #bcd5fe;
+  --ice-color-info-light-7: #cde0fe;
+  --ice-color-info-light-8: #deeafe;
+  --ice-color-info-light-9: #eef5ff;
+  --ice-text-color-primary: #333;
+  --ice-text-color-regular: #666;
+  --ice-text-color-secondary: #999;
+  --ice-text-color-placeholder: #aaa;
+  --ice-text-color-disabled: #acacac;
+  --ice-fill-color: #eeeeee;
+  --ice-fill-color-light: #f2f2f2;
+  --ice-fill-color-lighter: #f6f6f6;
+  --ice-fill-color-extra-light: #f6f6f6;
+  --ice-fill-color-dark: #e8e8e8;
+  --ice-fill-color-darker: #e2e2e2;
+  --ice-fill-color-blank: #fff;
+  --ice-border-color: #d8d8d8;
+  --ice-border-color-dark: #cccccc;
+  --ice-component-size-large: 38px;
+  --ice-component-size-default: 34px;
+  --ice-component-size-small: 30px;
+}
+
+:root {
+  --ice-font-size-extra-large: 20px;
+  --ice-font-size-large: 18px;
+  --ice-font-size-medium: 16px;
+  --ice-font-size-base: 14px;
+  --ice-font-size-small: 13px;
+  --ice-font-size-extra-small: 12px;
+  --ice-border-radius-base: 4px;
+  --ice-border-radius-circle: 100%;
+  --ice-component-size-large: 38px;
+  --ice-component-size-default: 34px;
+  --ice-component-size-small: 30px;
+  --ice-border-width: 1px;
+  --ice-border-style: solid;
+  --ice-border: var(--ice-border-width) var(--ice-border-style) var(--ice-border-color);
+}
+
+/*# sourceMappingURL=index.css.map */

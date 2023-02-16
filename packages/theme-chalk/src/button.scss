@@ -1,0 +1,460 @@
+@use "mixins/mixins" as *;
+@use "mixins/var" as *;
+@use "mixins/function" as *;
+@use "common/size" as *;
+@use "sass:map";
+/**
+ * 修改 CSS 变量可以修改对应的颜色: 
+ * prop: 前缀可以是 '' / 'hover' / 'active'
+ *    text-color 文字颜色
+ *    bg-color 背景颜色
+ *    border-color 边框颜色
+ *    outline-color focus-visible 的 outline 颜色
+ *    focus-border-color focus-visible 的 button 颜色
+ */
+
+// default 样式的 css 变量
+@mixin button-default-style() {
+  $button-default-styles: (
+    "": (
+      "bg-color": ("fill-color", "blank"),
+      "text-color": ("text-color", "regular"),
+      "border-color": ("border-color"),
+      "outline-color": ("fill-color", "light"),
+      "height": ("component-size", "default"),
+    ),
+    "hover": (
+      "bg-color": ("fill-color", "blank"),
+      "text-color": ("color-primary"),
+      "link-text-color": ("text-color", "secondary"),
+      "border-color": ("color-primary", "light-3"),
+    ),
+    "active": (
+      "bg-color": ("color-primary", "light-9"),
+      "text-color": ("color-primary"),
+      "link-text-color": ("text-color", "primary"),
+      "border-color": ("color-primary", "light-3"),
+    ),
+    "disabled": (
+      "bg-color": ("fill-color", "blank"),
+      "text-color": ("text-color", "disabled"),
+      "border-color": ("border-color"),
+    ),
+  );
+
+  @include set-component-css-var-map('button', $button-default-styles);
+
+  &.is-plain {
+    @include button-plain-default-style();
+  }
+
+  &.is-text, 
+  &.is-link {
+    @include button-plain-default-style();
+
+    &.is-disabled {
+      background-color: transparent;
+      border-color: transparent;
+    }
+  }
+
+  &.is-border {
+    // @include css-var-from-global(('button', 'border-color'), ('color', $type));
+    // @include css-var-from-global(('button', 'hover-border-color'), ('color', $type));
+    // @include css-var-from-global(('button', 'focus-border-color'), ('color', $type, 'light-3'));
+    // @include css-var-from-global(('button', 'active-border-color'), ('color', $type, 'darker'));
+  }
+
+  &.is-ghost {
+    @include button-ghost-default-style();
+  }
+}
+
+@mixin button-ghost-default-style() {
+  $button-ghost-default-styles: (
+    "": (
+      "text-color": ("text-color", "regular"),
+      "border-color": ("text-color", "regular"),
+      "focus-border-color": ("text-color", "regular"),
+      "outline-color": ("fill-color", "light"),
+    ),
+    "hover": (
+      "text-color": ("text-color", "secondary"),
+      "border-color": ("text-color", "secondary"),
+    ),
+    "active": (
+      "text-color": ("text-color", "primary"),
+      "border-color": ("text-color", "primary"),
+    ),
+  );
+  @include set-component-css-var-map('button', $button-ghost-default-styles);
+}
+
+// .is-plain && default 的 css 变量
+@mixin button-plain-default-style() {
+  $button-default-plain-styles: (
+    "": (
+      "text-color": ("text-color", "regular"),
+      "bg-color": ("fill-color", "light"),
+      "border-color": ("fill-color", "light"),
+      "outline-color": ("fill-color", "extra-light"),
+      "focus-border-color": ("border-color", "dark"),
+    ),
+    "hover": (
+      "text-color": ("text-color", "regular"),
+      "link-text-color": ("color-primary"),
+      "bg-color": ("fill-color", "dark"),
+      "border-color": ("fill-color", "light"),
+    ),
+    "active": (
+      "text-color": ("text-color", "regular"),
+      "link-text-color": ("color-primary", "darker"),
+      "bg-color": ("fill-color", "darker"),
+      "border-color": ("fill-color", "light"),
+    ),
+    "disabled": (
+      "text-color": ("text-color", "disabled"),
+      "bg-color": ("fill-color", "lighter"),
+      "border-color": ("fill-color", "lighter"),
+    )
+  );
+  @include set-component-css-var-map('button', $button-default-plain-styles);
+}
+
+// .is-plain 的 css 变量
+@mixin button-plain-style($type) {
+  $button-plain-styles: (
+    "": (
+      "text-color": ("color", $type),
+      "bg-color": ("color", $type, "light-8"),
+      "border-color": ("color", $type, "light-8"),
+      "explicit-border-color": ("color", $type),
+      "outline-color": ("color", $type, "light-9"),
+      "focus-border-color": ("color", $type, "light-5"),
+    ),
+    "hover": (
+      "text-color": ("color", $type),
+      "link-text-color": ("color", $type, "light-3"),
+      "bg-color": ("color", $type, "light-7"),
+      "border-color": ("color", $type, "light-7"),
+    ),
+    "active": (
+      "text-color": ("color", $type),
+      "link-text-color": ("color", $type, "darker"),
+      "bg-color": ("color", $type, "light-6"),
+      "border-color": ("color", $type, "light-6"),
+    ),
+    "disabled": (
+      "text-color": ("color", $type, "light-5"),
+      "bg-color": ("color", $type, "light-9"),
+      "border-color": ("color", $type, "light-9"),
+    )
+  );
+
+  @include set-component-css-var-map('button', $button-plain-styles);
+}
+
+// .is-ghost
+@mixin button-ghost-style($type) {
+  $button-ghost-styles: (
+    "": (
+      "text-color": ("color", $type),
+      "border-color": ("color", $type, "light-1"),
+      "focus-border-color": ("color", $type, "light-1"),
+      "outline-color": ("color", $type, "alpha"),
+    ),
+    "hover": (
+      "text-color": ("color", $type, "light-3"),
+      "border-color": ("color", $type, "light-3"),
+    ),
+    "active": (
+      "text-color": ("color", $type, "darker"),
+      "border-color": ("color", $type, "dark"),
+    ),
+    "disabled": (
+      "text-color": ("color", $type, "light-5"),
+      "border-color": ("color", $type, "light-5"),
+      "bg-color": ("color-transparent"),
+    ),
+  );
+  @include set-component-css-var-map('button', $button-ghost-styles);
+}
+
+// css 变量
+@mixin button-style($type) {
+  $button-styles: (
+    // normal 正常态
+    "":
+      (
+        // --ice-text-color: var(--color-white);
+        "text-color": ("color", "white"),
+        "bg-color": ("color", $type),
+        "border-color": ("color", $type),
+        "outline-color": ("color", $type, "alpha"),
+        "active-color": ("color", $type, "dark"),
+        "focus-border-color": ("color", $type)
+      ),
+    // hover 态
+    "hover":
+      (
+        "text-color": ("color", "white"),
+        "bg-color": ("color", $type, "light-1"),
+        "border-color": ("color", $type, "light-1"),
+        // 'outline-color': ('color', $type, 'alpha'),
+        // 'active-color': ('color', $type, 'dark'),,
+      ),
+    // active 态
+    "active":
+      (
+        "text-color": ("color", "white"),
+        "bg-color": ("color", $type, "dark"),
+        "border-color": ("color", $type, "dark"),
+        // 'outline-color': ('color', $type),
+        // 'active-color': ('color', $type, 'dark'),,
+      ),
+    // disabled 态
+    "disabled":
+      (
+        'text-color': ('color', 'white'),
+        "bg-color": ("color", $type, "light-5"),
+        "border-color": ("color", $type, "light-5"),
+      )
+  );
+
+  @include set-component-css-var-map('button', $button-styles);
+
+  &.is-plain,
+  &.is-text, 
+  &.is-link {
+    @include button-plain-style($type);
+  }
+
+  &.is-border {
+    @include css-var-from-global(('button', 'border-color'), ('color', $type));
+    @include css-var-from-global(('button', 'hover-border-color'), ('color', $type));
+    @include css-var-from-global(('button', 'focus-border-color'), ('color', $type, 'light-3'));
+    @include css-var-from-global(('button', 'active-border-color'), ('color', $type, 'darker'));
+  }
+
+  &.is-ghost {
+    @include button-ghost-style($type);
+  }
+
+}
+
+@mixin button-size(
+  $padding-vertical,
+  $padding-horizontal,
+  $font-size,
+  $border-radius,
+  $icon-size
+) {
+  padding: $padding-vertical $padding-horizontal;
+  font-size: $font-size;
+  border-radius: $border-radius;
+  // #{'--icon-size'}: #{$icon-size};
+  @include set-css-var-value('icon-size', $icon-size);
+}
+
+// 在 .iceButton 中添加 default 按钮的 css 变量
+@include b(button) {
+  @include button-default-style();
+}
+
+@include b(button) {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  // --ice-button-text-color
+  color: getCssVar("button", "text-color");
+  // --ice-border
+  border: getCssVar("border");
+  border-color: getCssVar("button", "border-color");
+  // --ice-button-bg-color
+  background-color: getCssVar("button", "bg-color");
+
+  height: getCssVar("button", "height");
+  transition: 0.1s;
+  // 使中英文高度一致
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+  outline: none;
+  font-weight: normal; // TODO
+  user-select: none; // 禁用选择
+  -webkit-appearance: none; // TODO: ?
+
+  &:hover,
+  &:focus {
+    // --ice-button-hover-text-color
+    color: getCssVar("button", "hover", "text-color");
+    // --ice-button-hover-border-color
+    border-color: getCssVar("button", "hover", "border-color");
+    // --ice-button-hover-bg-color
+    background-color: getCssVar("button", "hover", "bg-color");
+    outline: none;
+  }
+
+  &:active {
+    // --ice-button-active-text-color
+    color: getCssVar("button", "active", "text-color");
+    // --ice-button-active-border-color
+    border-color: getCssVar("button", "active", "border-color");
+    // --ice-button-active-bg-color
+    background-color: getCssVar("button", "active", "bg-color");
+  }
+
+  // tab 键切换按钮时高亮
+  &:focus-visible {
+    outline: 3px solid;
+    outline-color: getCssVar("button", "outline-color");
+    border-color: getCssVar("button", "focus-border-color");
+  }
+
+  @include when(disabled) {
+    &,
+    &:hover,
+    &:focus {
+      color: getCssVar('button', 'disabled', 'text-color');
+      cursor: not-allowed;
+      // background-image: none;
+      background-color: getCssVar('button', 'disabled', 'bg-color');
+      border-color: getCssVar('button', 'disabled', 'border-color');
+    }
+  }
+
+  @debug map.get($button-icon-size, 'default');
+
+  @include button-size(
+    map.get($button-padding-vertical, 'default') - $border-width, 
+    map.get($button-padding-horizontal, 'default') - $border-width,
+    map.get($button-font-size, 'default'), 
+    map.get($button-border-radius, 'default'),
+    map.get($button-icon-size, 'default')
+  );
+
+  /* ====== 按钮风格 ====== */
+
+  // .is-plain
+  @include when(plain) {
+    outline-color: getCssVar("button", "outline-color");
+  }
+  
+  // .is-text
+  @include when(text) {
+    background-color: transparent;
+    border: 1px solid transparent;
+    outline: none;
+
+    // 去除 hover 的背景颜色和边框
+    @include when(disabled) {
+      background-color: transparent;
+      border: 1px solid transparent;
+    }
+
+    &:not(.is-disabled) {
+      &:hover,
+      &:focus {
+        background-color: getCssVar("fill-color", "lighter");
+      }
+
+      &:active {
+        background-color: getCssVar("fill-color");
+      }
+    }
+  }
+  // .is-link
+  @include when(link) {
+    background-color: transparent;
+    border: 1px solid transparent;
+    outline-color: getCssVar("button", "outline-color");
+    padding: 5px;
+    height: auto;
+
+    // 去除 hover 时的背景颜色
+    @include when(disabled) {
+      background-color: transparent;
+      border: 1px solid transparent;
+    }
+
+    &:not(.is-disabled) {
+      &:hover,
+      &:focus {
+        color: getCssVar("button", "hover", "link-text-color");
+      }
+
+      &:active {
+        color: getCssVar("button", "active", "link-text-color");
+      }
+    }
+  }
+  // 幽灵按钮
+  @include when(ghost) {
+    background-color: transparent;
+  }
+
+  // 边框按钮
+  @include when(border) {
+    // default
+    @include css-var-from-global(('button', 'border-color'), ('text-color', 'regular'));
+    @include css-var-from-global(('button', 'hover', 'border-color'), ('text-color', 'regular'));
+    @include css-var-from-global(('button', 'active', 'border-color'), ('text-color', 'primary'));
+    @include css-var-from-global(('button', 'focus', 'border-color'), ('text-color', 'regular'));
+  }
+  // 虚线边框
+  @include when(dashed) {
+    border-style: dashed;
+  }
+
+  /* ====== 按钮边框风格 ====== */
+
+  // 大圆角按钮
+  @include when(round) {
+    border-radius: getCssVar('button-height');
+  }
+  // 圆形按钮
+  @include when(circle) {
+    width: getCssVar('button-height');
+    border-radius: getCssVar('border-radius', 'circle');
+    padding: map.get($button-padding-vertical, 'default') - $border-width;
+  }
+  
+  // .iceButton-primary
+  // 新增 type 相关的 css 变量，
+  // 覆盖 default 的各个状态原先的 css 变量（hover / active / disabled）
+  @each $type in (primary, success, warning, danger, info) {
+    @include m($type) {
+      @include button-style($type);
+    }
+  }
+
+  // button 中的图标
+  & [class*='#{$namespace}Icon'] {
+    @debug &;
+    & + span {
+      margin-left: map.get($button-icon-span-gap, "default");
+    }
+    svg {
+      vertical-align: bottom;
+    }
+  }
+
+  @each $size in (large, small) {
+    @include m($size) {
+      // --ice-button-height
+      @include css-var-from-global(('button', 'height'), ('component-size', $size));
+      
+      @include button-size(
+        map.get($button-padding-vertical, $size) - $border-width, 
+        map.get($button-padding-horizontal, $size) - $border-width, 
+        map.get($button-font-size, $size), 
+        map.get($button-border-radius, $size),
+        map.get($button-icon-size, $size)
+      )
+    }
+  }
+}

@@ -1,0 +1,28 @@
+@keyframes rotating {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+.iceIcon {
+  --icon-color: inherit;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 1em;
+  width: 1em;
+  line-height: 1em;
+  color: var(--icon-color);
+  fill: currentColor;
+  font-size: inherit;
+}
+.iceIcon svg {
+  width: 1em;
+  height: 1em;
+}
+.iceIcon.is-loading {
+  animation: rotating 2s linear infinite;
+}/*# sourceMappingURL=icon.css.map */

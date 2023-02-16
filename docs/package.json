@@ -1,0 +1,19 @@
+{
+  "name": "@iceblink/docs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vitepress dev ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "unplugin-vue-macros": "^1.7.3",
+    "vitepress": "1.0.0-alpha.45"
+  },
+  "dependencies": {
+    "@iceblink/svg-icons": "workspace:^1.0.0"
+  }
+}

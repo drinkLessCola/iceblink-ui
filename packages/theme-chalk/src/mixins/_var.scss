@@ -1,0 +1,54 @@
+
+@use 'function' as *;
+@use 'sass:map';
+
+// 从已有的 css 变量中生成新的 css 变量
+// @include css-var-from-global(('button', 'text-color'), ('color', $type))
+// --el-button-text-color: var(--el-color-#{$type});
+@mixin css-var-from-global($var, $globalVar) {
+  $varName: joinVarName($var);
+  $globalVarName: joinVarName($globalVar);
+  #{$varName}: var(#{$globalVarName});
+}
+
+@mixin set-css-var-value($var, $value) {
+  #{joinVarName($var)}: #{$value};
+}
+
+@mixin set-component-css-var($name, $variables) {
+  @each $attribute, $value in $variables {
+    // @if $attribute == 'default' {}
+    #{getCssVarName($name, $attribute)}: #{$value}
+  }
+}
+
+// 设置全局颜色 css 变量
+@mixin set-css-color-type($colors, $type) {
+  $color-gradation: alpha, dark, darker;
+  // ice-color-primary
+  @include set-css-var-value(('color', $type), map.get($colors, $type, 'base'));
+
+  @each $colorLevel in $color-gradation {
+    @include set-css-var-value(
+      ('color', $type, $colorLevel),
+      map.get($colors, $type, $colorLevel)
+    );
+  }
+  // 设置各个颜色的多色阶
+  @each $i in (1, 3, 5, 6, 7, 8, 9) {
+    @include set-css-var-value(
+      ('color', $type, 'light-#{$i}'),
+      map.get($colors, $type, 'light-#{$i}')
+    );
+  } 
+
+}
+
+@mixin set-component-css-var-map($comp, $styleMap) {
+  @each $state, $stateStyleMap in $styleMap {
+    @each $propName, $color in $stateStyleMap {
+      // ice-button-hover-bg-color: var(--color-primary-light-1)
+      @include css-var-from-global(($comp, $state, $propName), $color)
+    }
+  }
+};

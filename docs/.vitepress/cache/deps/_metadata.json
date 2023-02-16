@@ -1,0 +1,25 @@
+{
+  "hash": "23bf0aa1",
+  "browserHash": "821164be",
+  "optimized": {
+    "vue": {
+      "src": "../../../../node_modules/.pnpm/vue@3.2.45/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "78f11b84",
+      "needsInterop": false
+    },
+    "lodash-unified": {
+      "src": "../../../../node_modules/.pnpm/lodash-unified@1.0.3_3ib2ivapxullxkx3xftsimdk7u/node_modules/lodash-unified/import.js",
+      "file": "lodash-unified.js",
+      "fileHash": "6bc5d1e0",
+      "needsInterop": false
+    },
+    "@vue/shared": {
+      "src": "../../../../node_modules/.pnpm/@vue+shared@3.2.47/node_modules/@vue/shared/dist/shared.esm-bundler.js",
+      "file": "@vue_shared.js",
+      "fileHash": "43efee6b",
+      "needsInterop": false
+    }
+  },
+  "chunks": {}
+}

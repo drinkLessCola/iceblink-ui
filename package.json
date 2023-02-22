@@ -17,6 +17,7 @@
     "@iceblink/hooks": "workspace:^1.0.0",
     "@iceblink/theme-chalk": "workspace:^1.0.0",
     "@iceblink/utils": "workspace:^1.0.0",
+    "@popperjs/core": "^2.11.6",
     "@typescript-eslint/eslint-plugin": "^5.50.0",
     "@typescript-eslint/parser": "^5.50.0",
     "@vue/compiler-sfc": "^3.2.47",

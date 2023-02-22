@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@iceblink/components": "workspace:^1.0.0",
-    "@iceblink/svg-icons": "workspace:^1.0.0"
+    "@iceblink/svg-icons": "workspace:^1.0.0",
+    "@iceblink/tokens": "workspace:^1.0.0"
   }
 }

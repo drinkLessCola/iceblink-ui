@@ -1,3 +1,4 @@
+import { demoBlockPlugin } from 'vitepress-theme-demoblock'
 module.exports = {
   title: 'iceblink-ui',
   description: 'Iceblink Luck -- Cocteau Twins',
@@ -28,9 +29,18 @@ module.exports = {
       '/component/': [
         {
           text: '基础组件',
-          items: [{ text: 'Button', link: '/component/button' }]
+          items: [
+            { text: 'Button', link: '/component/button' },
+            { text: 'Dropdown', link: '/component/dropdown' },
+          ]
         }
       ]
+    },
+    
+  },
+  markdown: {
+    config:(md) => {
+      md.use(demoBlockPlugin)
     }
   }
 }

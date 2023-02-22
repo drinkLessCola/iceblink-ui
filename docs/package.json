@@ -11,7 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "unplugin-vue-macros": "^1.7.3",
-    "vitepress": "1.0.0-alpha.45"
+    "vitepress": "1.0.0-alpha.45",
+    "vitepress-theme-demoblock": "^2.0.2"
   },
   "dependencies": {
     "@iceblink/svg-icons": "workspace:^1.0.0"

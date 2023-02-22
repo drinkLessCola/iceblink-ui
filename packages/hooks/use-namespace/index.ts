@@ -42,7 +42,6 @@ export const useNamespace = (block: string) => {
   
   const is = (name: string, state: boolean = true) => {
     const _state = !!state
-    console.log(_state)
     return name && _state ? `${statePrefix}${name}` : ''
   }
   return {

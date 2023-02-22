@@ -48,7 +48,8 @@ export const buildProp = <
 
 /**
  * build component's props
- *
+ * 
+ * ? 解决了 vue 原生的 withDefaults 推断出的类型仍然具有 undefined 的问题
  * Record<string, ... > 中的 NativePropType 是为了解决如下 bug：
  * Prop 类型配置可能通过 构造函数 而非对象字面量。
  * Type 'BooleanConstructor' has no properties in common with type 'IcePropInput<any, any, any, any>'.ts(2345)
@@ -73,17 +74,3 @@ export const buildProps = <
     buildProp(option as any, key)
   ])
 ) as any
-
-
-
-
-// declare function test<
-//   Type = never, 
-//   Value = never, 
-//   Required extends boolean = false, 
-//   Default extends IcePropMergeType<Type, Value> = never
-// >(
-//   prop: IcePropInput<Type, Value, Required, Default>
-// ): Required;
-
-// let res = test(Boolean)

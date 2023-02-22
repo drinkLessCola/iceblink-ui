@@ -22,3 +22,8 @@ export const isStringNumber = (val: string): boolean => {
   
   return !Number.isNaN(Number(val))
 }
+
+export const isElement = (e: unknown): e is Element => {
+  if(typeof Element === 'undefined') return false
+  return e instanceof Element
+}

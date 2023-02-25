@@ -47,7 +47,7 @@ import { tooltipProps, tooltipEmits } from './tooltip'
 import { IcePopper, IcePopperContent, IcePopperArrow } from '@iceblink/components/popper'
 import { IceTooltipTrigger, IceTooltipContent } from '@iceblink/components/tooltip'
 import { computed, provide, readonly, ref, toRef, unref, watch } from 'vue';
-import { useDelayedToggle } from '@iceblink/hooks';
+import { useDelayedToggle, usePopperContainer } from '@iceblink/hooks';
 import { TOOLTIP_INJECTION_KEY } from '@iceblink/tokens/tooltip';
 import { isBoolean } from '@vueuse/core';
 import { useId } from '@iceblink/hooks';
@@ -59,7 +59,11 @@ const contentRef = ref<InstanceType<typeof IcePopperContent> | null>(null)
 
 // 受控模式，直接控制 popper 的 visible 属性
 const controlled = computed(() => isBoolean(props.visible))
-let id = computed(() => props.id || useId('tooltip'))
+
+// 创建一个 container 元素
+usePopperContainer()
+
+let id = useId()
 
 const open = ref(false)
 const handleOpen = () => {

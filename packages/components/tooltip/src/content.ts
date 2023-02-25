@@ -11,7 +11,10 @@ export const tooltipContentProps = buildProps({
   },
   content: String,
   /** @description 是否使用 teleport， true 会被追加到 appendTo 的位置 */
-  teleported: Boolean,
+  teleported: {
+    type: Boolean,
+    default: true
+  },
   tabindex: {
     type: Number,
     default: 0

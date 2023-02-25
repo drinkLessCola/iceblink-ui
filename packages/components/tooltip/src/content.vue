@@ -72,8 +72,8 @@ const contentRef: Ref<InstanceType<typeof IcePopperContent> | null> = ref(null)
 const shouldShow = computed(() => unref(disabled) ? false : unref(open))
 const shouldRender = computed(() => unref(open))
 
-// const { selector } = usePopperContainerId()
-// const appendTo = computed(() => props.appendTo || selector)
+const { selector } = usePopperContainerId()
+const appendTo = computed(() => props.appendTo || selector.value)
 
 const contentStyle = computed(() => props.style ?? {})
 const ariaHidden = computed(() => !unref(open))

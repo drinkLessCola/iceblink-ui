@@ -32,6 +32,7 @@ module.exports = {
           items: [
             { text: 'Button', link: '/component/button' },
             { text: 'Dropdown', link: '/component/dropdown' },
+            { text: 'Tooltip', link: '/component/tooltip' },
           ]
         }
       ]

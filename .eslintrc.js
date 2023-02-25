@@ -30,7 +30,9 @@ module.exports = {
     'vue/prefer-import-from-vue': 'off',
     'vue/multi-word-component-names': 'off',
     quotes: ['error', 'single'],
-    'prettier/prettier': 'off'
+    'prettier/prettier': 'off',
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': ['error']
   },
   globals: { 
     defineProps: 'readonly',

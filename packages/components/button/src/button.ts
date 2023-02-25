@@ -1,6 +1,6 @@
 import type { ExtractPropTypes } from 'vue'
 import { buildProps } from '@iceblink/utils'
-import { iconPropType } from '@iceblink/utils/icons'
+import { IconPropType } from '@iceblink/utils/icons'
 // import { Loading } from '@iceblink/svg-icons/src/components'
 import Loading from './loading.vue'
 
@@ -32,7 +32,7 @@ export const buttonProps = buildProps({
   },
   /** @description 图标 */
   icon: {
-    type: iconPropType,
+    type: IconPropType,
   },
   /** @description 图标相对按钮的位置 */
   iconAlign: {
@@ -51,7 +51,7 @@ export const buttonProps = buildProps({
 
   /** @description 加载图标 */
   loadingIcon: {
-    type: iconPropType,
+    type: IconPropType,
     default: () => Loading
   },
 

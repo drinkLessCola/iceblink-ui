@@ -10,7 +10,7 @@ export const iconProps = buildProps({
   color: {
     type: String
   },
-  
+  icon: String,
 } as const)
 
 export type IconProps = ExtractPropTypes<typeof iconProps>

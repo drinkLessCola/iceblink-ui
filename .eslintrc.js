@@ -29,6 +29,8 @@ module.exports = {
     'vue/singleline-html-element-content-newline': 'off',
     'vue/prefer-import-from-vue': 'off',
     'vue/multi-word-component-names': 'off',
+    'vue/require-component-is': 'off',
+    'vue/no-v-for-template-key': 'off',
     quotes: ['error', 'single'],
     'prettier/prettier': 'off',
     'no-unused-vars': 'off',

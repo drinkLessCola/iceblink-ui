@@ -19,3 +19,4 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+declare function defineOptions(options: { name?: string; inheritAttrs?: boolean; });

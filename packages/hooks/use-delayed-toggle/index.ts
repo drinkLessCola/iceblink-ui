@@ -1,22 +1,25 @@
 /* eslint-disable no-unused-vars */
-import { withDefaults, defineProps } from 'vue'
 import { useTimeout } from '../use-timeout'
-import { ToRefs } from 'vue'
-import { unref } from 'vue'
+import { ToRefs, unref } from 'vue'
+import type { ExtractPropTypes } from 'vue'
+import { buildProps } from '@iceblink/utils'
 
-export const useDelayedToggleProps = withDefaults(defineProps<{
-  showDelay?: number
-  hideDelay?: number
-}>(), {
-  showDelay: 0,
-  hideDelay: 2000
-})
+export const useDelayedToggleProps = buildProps({
+  showDelay: {
+    type: Number,
+    default: 0,
+  },
+  hideDelay: {
+    type: Number,
+    default: 200,
+  }
+} as const)
 
 // showDelay 和 hideDelay 以 ref 形式传入：
 export type UseDelayedToggleProps = {
   open: (event?: Event) => void
   close: (event?: Event) => void
-} & ToRefs<typeof useDelayedToggleProps>
+} & ToRefs<ExtractPropTypes<typeof useDelayedToggleProps>>
 
 export const useDelayedToggle = ({
   open,

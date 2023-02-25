@@ -10,7 +10,6 @@ type ClassObjectType = Record<string, boolean>
 type ClassType = string | ClassObjectType | ClassType[]
 
 const POSITIONING_STRATEGIES = ['fixed', 'absolute'] as const
-
 /**
  * popperjs options 相关的变量
  *  placement
@@ -75,9 +74,10 @@ export const popperContentProps = buildProps({
     type: definePropType<ClassType>([String, Array, Object]),
   },
   colorMode: {
-    type: String
+    type: String,
+    values: ['light', 'dark'],
+    default: 'light'
   },
-
   pure: Boolean,
   popperClass: {
     type: definePropType<ClassType>([String, Array, Object]),
@@ -99,7 +99,13 @@ export const popperContentProps = buildProps({
   },
   /** @description 是否显示 popper */
   visible: Boolean,
-
+  /** @description tooltip 是否可进入 */
+  enterable: {
+    type: Boolean,
+    default: true,
+  },
+  // /** @description 是否在 popper 显示时自动聚焦 */
+  // focusOnShow: Boolean,
 } as const)
 
 export const popperContentEmits = {
@@ -112,7 +118,7 @@ export const popperContentEmits = {
 
 export type PopperCoreConfigProps = ExtractPropTypes<typeof popperCoreConfigProps>
 export type PopperContentProps = ExtractPropTypes<typeof popperContentProps>
-export type PopperContentEmits = typeof popperContentEmits
+export type PopperContentEmits = typeof popperContentEmits;
 
 export interface CreatePopperInstanceParams {
   referenceElem: Measurable

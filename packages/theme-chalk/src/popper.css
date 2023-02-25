@@ -1,0 +1,86 @@
+.icePopper {
+  --ice-arrow-color: var(--ice-fill-color-blank);
+  position: absolute;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 12px;
+  font-size: var(--ice-font-size-base);
+  border-radius: var(--ice-border-radius-base);
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.1);
+}
+.icePopper.is-light {
+  background-color: var(--ice-fill-color-blank);
+  border: 1px solid var(--ice-border-color-light);
+  color: var(--ice-text-color-regular);
+}
+
+.icePopper.is-dark {
+  --ice-arrow-color: var(--ice-text-color-primary);
+  background-color: var(--ice-text-color-primary);
+  border: 1px solid var(--ice-text-color-primary);
+  color: var(--ice-fill-color);
+}
+.icePopper.is-dark .icePopper_arrow::before {
+  border: 1px solid var(--ice-text-color-primary);
+  background-color: var(--ice-text-color-primary);
+}
+
+.icePopper.is-pure {
+  padding: 0;
+}
+
+.icePopper_arrow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+}
+.icePopper_arrow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0px;
+  height: 0px;
+  border: 6px solid var(--ice-border-color-light);
+  border-top-right-radius: 2px;
+  border-left: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-top-left-radius: 2px;
+  box-sizing: border-box;
+}
+.icePopper_arrow::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0px;
+  height: 0px;
+  border: 5px solid var(--ice-arrow-color);
+  border-top-right-radius: 2px;
+  border-left: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-top-left-radius: 2px;
+  box-sizing: border-box;
+}
+
+.icePopper[data-popper-placement^=top] > .icePopper_arrow {
+  bottom: -4.5px;
+  transform: rotate(135deg);
+}
+.icePopper[data-popper-placement^=bottom] > .icePopper_arrow {
+  top: -4.5px;
+  transform: rotate(-45deg);
+}
+.icePopper[data-popper-placement^=left] > .icePopper_arrow {
+  right: -4.5px;
+  transform: rotate(45deg);
+}
+.icePopper[data-popper-placement^=right] > .icePopper_arrow {
+  left: -4.5px;
+  transform: rotate(-135deg);
+}
+
+/*# sourceMappingURL=popper.css.map */

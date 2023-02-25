@@ -1,7 +1,7 @@
 <template>
   <!-- v-bind + inheritAttrs 是为了使事件处理函数绑定到元素上 -->
   <ice-only-child 
-    v-if="!targetTriggering"
+    v-if="!virtualTriggering"
     v-bind="$attrs"
     :aria-controls="ariaControls"
     :aria-describedby="ariaDescribedby"
@@ -13,31 +13,20 @@
 </template>
 <script setup lang="ts">
 import { IceOnlyChild } from '@iceblink/components/slot'
-import { PropType, computed, inject, onBeforeUnmount, onMounted, watch } from 'vue'
+import { computed, inject, onBeforeUnmount, onMounted, watch } from 'vue'
 import { unrefElement } from '@vueuse/core';
-import { Measurable, POPPER_INJECTION_KEY } from '@iceblink/tokens'
+import { POPPER_INJECTION_KEY } from '@iceblink/tokens'
 import { isElement } from '@iceblink/utils';
 import { isNil } from 'lodash';
 import { useForwardRef } from '@iceblink/hooks';
+import { popperTriggerProps } from './trigger';
 
 defineOptions({
   name: 'IcePopperTrigger',
   inheritAttrs: false,
 })
 
-interface PopperTriggerProps {
-  /** @description */
-  targetRef?: PropType<Measurable>,
-  /** @description */
-  targetTriggering?: boolean,
-   /** @description */
-  triggerRef?: PropType<Measurable | undefined>,
-  /** @description */
-  id?: string,
-  /** @description */
-  open?: boolean,
-}
-const props = defineProps<PopperTriggerProps>()
+const props = defineProps(popperTriggerProps)
 
 // 注入 triggerRef 并向子组件提供 setTriggerRef 方法
 // 通过 OnlyChild 组件在其默认插槽的元素添加指令
@@ -58,12 +47,12 @@ const ariaHaspopup = computed(() => {
   return undefined
 })
 
-// 当前元素控制着 id 指示的另一个元素
+// 当前元素(trigger)控制着 id 指示的另一个元素(popup 结构)
 const ariaControls = computed(() => {
   return ariaHaspopup.value ? props.id : undefined
 })
 
-// 当前元素由 id 指示的元素进行描述
+// 当前元素由 id 指示的元素进行描述, tooltip 的 content 由 trigger 指示
 const ariaDescribedby = computed(() => {
   if(role && role.value === 'tooltip') {
     return props.open && props.id ? props.id : undefined
@@ -79,19 +68,16 @@ const ariaExpanded = computed(() => {
 let cancelTriggerAriaWatch
 
 onMounted(() => {
-  // triggerRef.value = unref(triggerElem)
-
-  // 将父组件的 triggerRef 属性的值与 targetRef 的值绑定
+  // triggerRef 与 virtualRef 绑定
+  // 虚拟触发
   watch(
-    () => props.targetRef,
-    (newTarget) => {
-      if(newTarget) {
-        triggerRef.value = unrefElement(newTarget as unknown as HTMLElement)
+    () => props.virtualRef,
+    (virtualRef) => {
+      if(virtualRef) {
+        triggerRef.value = unrefElement(virtualRef as HTMLElement)
       }
     },
-    {
-      immediate: true,
-    }
+    { immediate: true }
   )
 
   // 监听 trigger 元素的变化，转移事件处理程序 和 动态修改新元素的 ARIA 属性
@@ -105,11 +91,13 @@ onMounted(() => {
         // 为新的元素添加 props 上定义的事件处理函数
         // 为旧的元素移除事件处理函数
         (
-          // TODO
           [
             'onMouseenter', 
             'onMouseleave', 
             'onClick', 
+            'onKeydown',
+            'onFocus',
+            'onBlur',
             'onContextmenu'
           ] as const
         ).forEach((eventName) => {

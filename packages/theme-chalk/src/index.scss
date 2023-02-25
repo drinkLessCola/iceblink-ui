@@ -1,6 +1,10 @@
 @use './button';
 @use './icon';
+@use './dropdown';
+@use './popper';
+
 
 @use './common/color';
 @use './common/size';
+@use './common/transition';
 @use './global';

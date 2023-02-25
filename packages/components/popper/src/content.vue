@@ -1,5 +1,6 @@
 <template>
   <div
+    :id="id"
     ref="popperContentRef"
     :style="contentStyle"
     :class="contentClass"
@@ -16,7 +17,8 @@ import { POPPER_CONTENT_INJECTION_KEY, POPPER_INJECTION_KEY } from '@iceblink/to
 import { useNamespace, useZIndex } from '@iceblink/hooks';
 import { WatchStopHandle, computed, inject, onMounted, provide, ref, unref, watch } from 'vue';
 import { createPopper } from '@popperjs/core'
-import { popperContentProps, popperContentEmits, buildPopperOptions, CreatePopperInstanceParams } from './content';
+import { popperContentProps, popperContentEmits, buildPopperOptions } from './content';
+import type { CreatePopperInstanceParams } from './content'
 import { unwrapMeasurableElem } from './util';
 
 const emit = defineEmits(popperContentEmits)
@@ -77,7 +79,7 @@ const contentStyle = computed(
 // class
 const contentClass = computed(() => [
   ns.b(),
-  // ns.is('pure', props.pure),
+  ns.is('pure', props.pure),
   ns.is(props.colorMode),
   props.popperClass,
 ])
@@ -103,13 +105,15 @@ const createPopperInstance = ({
   return createPopper(referenceElem, popperContentElem, options)
 }
 
-// const trapped = ref<boolean>(false)
 
 
-const updatePopper = () => {
+const updatePopper = (shouldUpdateZIndex = true) => {
   unref(popperInstanceRef)?.update()
+  shouldUpdateZIndex && (contentZIndex.value = props.zIndex || nextZIndex())
 }
 
+// // 通过 props 传递给 FocusTrap 组件
+// const trapped = ref<boolean>(false)
 /**
  * 通过修改 eventListeners 修饰符的 enabled 属性，更新 popper 的开启状态
  */
@@ -121,9 +125,13 @@ const togglePopperAlive = () => {
     modifiers: [...(options.modifiers || []), monitorable],
   }))
 
-  updatePopper()
-
-  // TODO: toggle trapped.value
+  updatePopper(false)
+  // if(props.visible && props.focusOnShow) {
+  //   trapped.value = true
+  // } else if(props.visible === false) {
+  //   // TODO: ?
+  //   trapped.value = false
+  // }
 }
 
 onMounted(() => {
@@ -154,7 +162,7 @@ onMounted(() => {
         // 侦听新的触发器元素的坐标属性，发生改变时通过 updatePopper 更新 popper
         updateHandle = watch(
           () => referenceElem.getBoundingClientRect(),
-          () => updatePopper(),
+          () => updatePopper(false),
           {
             immediate: true,
           }
@@ -171,14 +179,14 @@ onMounted(() => {
   )
 
   // 监视 trigger 的 HTML Attribute
-  // watch(
-  //   () => props.triggerTargetElem,
-  //   (triggerTargetElem, prevTriggerTargetElem) => {
-  //     const elem = unref(triggerTargetElem || popperContentRef.value)
-  //     const prevElem = unref(prevTriggerTargetElem || popperContentRef.value)
-  //   },
-  //   { immediate: true }
-  // )
+  watch(
+    () => props.triggerTargetElem,
+    (triggerTargetElem, prevTriggerTargetElem) => {
+      const elem = unref(triggerTargetElem || popperContentRef.value)
+      const prevElem = unref(prevTriggerTargetElem || popperContentRef.value)
+    },
+    { immediate: true }
+  )
 
   // 根据 props.visible 控制 popper 的显示
   watch(() => props.visible, togglePopperAlive, { immediate: true })

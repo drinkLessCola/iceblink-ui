@@ -1,0 +1,28 @@
+.ice-fade-in-linear-enter-active,
+.ice-fade-in-linear-leave-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: transform 0.1s linear, opacity 0.1s linear;
+}
+
+.ice-fade-in-linear-enter-from,
+.ice-fade-in-linear-leave-to {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.ice-zoom-in-top-enter-active,
+.ice-zoom-in-top-leave-active {
+  opacity: 1;
+  transform: scaleY(1);
+  transform-origin: center top;
+  transition: transform 0.2s ease-in, opacity 0.2s ease-in;
+}
+
+.ice-zoom-in-top-enter-from,
+.ice-zoom-in-top-leave-to {
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+/*# sourceMappingURL=transition.css.map */

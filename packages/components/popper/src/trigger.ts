@@ -3,13 +3,12 @@ import { buildProps, definePropType } from '@iceblink/utils'
 import { Measurable } from '@iceblink/tokens'
 
 export const popperTriggerProps = buildProps({
-  targetRef: {
+  /** @description 虚拟触发器元素 */
+  virtualRef: {
     type: definePropType<Measurable>(Object),
   },
-  targetTriggering: Boolean,
-  triggerRef: {
-    type: definePropType<Measurable | undefined>(Object)
-  },
+  /** @description 是否使用虚拟触发 */
+  virtualTriggering: Boolean,
   id: String,
   open: Boolean,
 })

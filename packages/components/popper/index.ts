@@ -8,3 +8,12 @@ export const IcePopperContent = withInstall(Content)
 export const IcePopperTrigger = withInstall(Trigger)
 export const IcePopperArrow = withInstall(Arrow)
 export const IcePopper = withInstall(Popper)
+
+export { popperContentProps } from './src/content'
+export { popperTriggerProps } from './src/trigger'
+export { popperArrowProps } from './src/arrow'
+export { popperProps } from './src/popper'
+export type {
+  PopperRoleType, 
+  PopperColorMode
+} from './src/popper'

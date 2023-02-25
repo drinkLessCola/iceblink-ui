@@ -17,7 +17,7 @@
 
 @mixin e($element) {
   @at-root {
-    #{& + $element-aeparator + $element} {
+    #{& + $element-separator + $element} {
       @content;
     }
   }

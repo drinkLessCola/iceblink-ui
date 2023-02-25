@@ -1,0 +1,99 @@
+@use './mixins/mixins' as *;
+@use './mixins/_var' as *;
+@use './mixins/function' as *;
+@use 'sass:map';
+@use 'sass:math';
+
+@mixin border-triangle($border-width, $border-color) {
+  content: '';
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0px;
+  height: 0px;
+  border: $border-width solid $border-color;
+  border-top-right-radius: 2px;
+  border-left: $border-width solid transparent;
+  border-bottom: $border-width  solid transparent;
+  border-top-left-radius: 2px;
+  box-sizing: border-box;
+}
+
+
+$arrow-size: 10px;
+@include b(popper) {
+  @include set-css-var-value('arrow-color', getCssVar('fill-color', 'blank'));
+
+  position:absolute;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 12px;
+  font-size: getCssVar('font-size', 'base');
+  border-radius: getCssVar('border-radius', 'base');
+  box-shadow:0 0 12px 0 rgba(0, 0, 0, 0.1);
+
+  $arrow-selector: #{& + '_arrow'};
+  @include when(light) {
+    background-color: getCssVar('fill-color', 'blank');
+    border: 1px solid getCssVar('border-color', 'light');
+    color: getCssVar('text-color', 'regular');
+  }
+  
+  @include when(dark) {
+    @include set-css-var-value('arrow-color', getCssVar('text-color', 'primary'));
+
+    background-color: getCssVar('text-color', 'primary');
+    border: 1px solid getCssVar('text-color', 'primary');
+    color: getCssVar('fill-color');
+
+    #{$arrow-selector}::before {
+      border: 1px solid getCssVar('text-color', 'primary');
+      background-color: getCssVar('text-color', 'primary');
+    }
+  }
+
+  @include when(pure) {
+    padding: 0;
+  }
+
+  @include e(arrow) {
+    position: absolute;
+    width: $arrow-size;
+    height: $arrow-size;
+
+    &::before {
+      @include border-triangle($arrow-size / 2 + 1px, getCssVar('border-color', 'light'))
+    }
+
+    &::after {
+      @include border-triangle($arrow-size / 2, getCssVar('arrow-color'))
+      // box-shadow: 0 0 0 1px getCssVar('border-color', 'light');
+    }
+
+
+  }
+
+  // 箭头的位置
+  $placements: (
+    'top': 135deg,
+    'bottom': -45deg,
+    'left': 45deg,
+    'right': -135deg,
+  );
+
+  $opposite: (
+    'top': 'bottom',
+    'bottom': 'top',
+    'left': 'right',
+    'right': 'left',
+  );
+
+  @each $placement, $rotate in $placements {
+    &[data-popper-placement^='#{$placement}'] > #{$arrow-selector} {
+      #{map.get($opposite, $placement)}: -#{$arrow-size / 2 - 0.5px};
+      transform: rotate($rotate);
+    }
+  }
+}

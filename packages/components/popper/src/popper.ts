@@ -1,4 +1,5 @@
 import { buildProps } from '@iceblink/utils'
+import { ExtractPropTypes } from 'vue'
 
 const colorMode = ['light', 'dark'] as const
 const triggers = ['click', 'contextmenu', 'hover', 'focus'] as const
@@ -29,3 +30,6 @@ export const popperProps = buildProps({
     default: 'tooltip',
   }
 })
+
+export type PopperPropsType = ExtractPropTypes<typeof popperProps>
+export type PopperRoleType = PopperPropsType['role']

@@ -9,13 +9,10 @@
 <script setup lang="ts">
 import { useNamespace } from '@iceblink/hooks';
 import { POPPER_CONTENT_INJECTION_KEY } from '@iceblink/tokens'
-import { onBeforeUnmount } from 'vue';
-import { inject, watch } from 'vue';
+import { inject, watch, onBeforeUnmount } from 'vue';
+import { popperArrowProps } from './arrow'
 
-const props = withDefaults(
-  defineProps<{arrowOffset?: number}>(),
-  { arrowOffset: 0 }
-)
+const props = defineProps(popperArrowProps)
 
 
 const { arrowRef, arrowOffset } = inject(POPPER_CONTENT_INJECTION_KEY, undefined)!

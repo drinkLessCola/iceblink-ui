@@ -109,4 +109,9 @@ watch(
     } 
   },
 )
+
+defineExpose({
+  onOpen,
+  onClose,
+})
 </script>

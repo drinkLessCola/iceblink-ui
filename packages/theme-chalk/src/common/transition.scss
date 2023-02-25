@@ -19,6 +19,10 @@
   transform: scaleY(1);
   transform-origin: center top;
   transition: transform .2s ease-in, opacity .2s ease-in;
+
+  &[data-popper-placement^='top'] {
+    transform-origin: center bottom;
+  }
 }
 
 .ice-zoom-in-top-enter-from,

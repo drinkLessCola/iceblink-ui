@@ -1,7 +1,31 @@
 <script setup lang="ts">
-import { IceButton, IceDropdown, IceDropdownMenu, IceDropdownItem, IceTooltip } from  '@iceblink/components'
-import { Ref, onMounted, ref, unref } from 'vue';
+import { IceButton, IceDropdown, IceDropdownMenu, IceDropdownItem } from  '@iceblink/components'
 
+const handleMenuSelect = (e: Event, key: string) => {
+  console.log(e, key)
+}
+const menu = [
+  // groupA
+  [
+    { label: '查看评论', key: 'comment', disabled: true },
+    { label: '播放',  key: 'play', shortcut: 'Enter'},
+    { label: '下一首播放', key: 'playAfter' },
+  ], 
+  // groupB
+  [
+    { 
+      label: '收藏到歌单',
+      key: 'collect', 
+      children: [
+        { label: '歌单 1', key: 'list 1' },
+        { label: '歌单 2', key: 'list 2' },
+        { label: '歌单 3', key: 'list 3' },
+      ] 
+    },
+    { label: '分享', key: 'share' },
+  ]
+]
+ 
 // const tooltipVisible:Ref<boolean> = ref(false)
 // const handleToggle = () => {
 //   tooltipVisible.value = !unref(tooltipVisible)
@@ -52,6 +76,14 @@ import { Ref, onMounted, ref, unref } from 'vue';
 
 <template>
   <!-- <div style="height: 100px;" /> -->
+  <ice-dropdown 
+    :hide-on-click="false" 
+    :options="menu"
+    @select="handleMenuSelect"
+  >
+    <ice-button>点击 Option 不会关闭</ice-button>
+  </ice-dropdown>
+
 
   <ice-dropdown>
     <ice-button>选一个好地方</ice-button>

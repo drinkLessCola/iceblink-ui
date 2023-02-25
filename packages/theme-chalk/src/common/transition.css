@@ -18,6 +18,10 @@
   transform-origin: center top;
   transition: transform 0.2s ease-in, opacity 0.2s ease-in;
 }
+.ice-zoom-in-top-enter-active[data-popper-placement^=top],
+.ice-zoom-in-top-leave-active[data-popper-placement^=top] {
+  transform-origin: center bottom;
+}
 
 .ice-zoom-in-top-enter-from,
 .ice-zoom-in-top-leave-to {

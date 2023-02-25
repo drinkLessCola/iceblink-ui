@@ -1,0 +1,61 @@
+.iceDropdown {
+  display: inline-flex;
+  position: relative;
+}
+.iceDropdown_popper .iceDropdownMenu {
+  border: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.iceDropdownMenu {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  padding: 4px;
+  border-radius: 5px;
+}
+.iceDropdownMenu li {
+  width: 100%;
+}
+.iceDropdownMenu li + li {
+  margin: 0;
+}
+.iceDropdownMenu_item {
+  display: flex;
+  width: 100%;
+  padding: 6px 20px;
+  justify-content: left;
+  color: #555;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+.iceDropdownMenu_item:hover {
+  background-color: var(--ice-color-primary-light-9);
+  color: var(--ice-color-primary);
+  cursor: pointer;
+}
+.iceDropdownMenu_item-divided {
+  border: none;
+  background-color: var(--ice-border-color);
+  width: 100%;
+  height: 1px;
+  margin: 3px 0;
+}
+
+.iceDropdownMenu_item.is-disabled {
+  color: #aaa;
+}
+.iceDropdownMenu_item.is-disabled:hover {
+  background-color: #fff;
+  cursor: not-allowed;
+}
+
+/*# sourceMappingURL=dropdown.css.map */

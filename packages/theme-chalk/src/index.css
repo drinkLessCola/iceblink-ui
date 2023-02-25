@@ -548,6 +548,9 @@ ul {
   padding: 4px;
   border-radius: 5px;
 }
+.iceDropdownMenu li {
+  width: 100%;
+}
 .iceDropdownMenu li + li {
   margin: 0;
 }
@@ -555,7 +558,7 @@ ul {
   display: flex;
   width: 100%;
   padding: 6px 20px;
-  justify-content: center;
+  justify-content: left;
   color: #555;
   font-size: 14px;
   box-sizing: border-box;
@@ -568,7 +571,7 @@ ul {
 .iceDropdownMenu_item-divided {
   border: none;
   background-color: var(--ice-border-color);
-  width: 90%;
+  width: 100%;
   height: 1px;
   margin: 3px 0;
 }
@@ -685,6 +688,10 @@ ul {
   transform: scaleY(1);
   transform-origin: center top;
   transition: transform 0.2s ease-in, opacity 0.2s ease-in;
+}
+.ice-zoom-in-top-enter-active[data-popper-placement^=top],
+.ice-zoom-in-top-leave-active[data-popper-placement^=top] {
+  transform-origin: center bottom;
 }
 
 .ice-zoom-in-top-enter-from,

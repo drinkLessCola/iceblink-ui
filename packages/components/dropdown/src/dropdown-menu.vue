@@ -1,54 +1,53 @@
 <template>
-  <ul :class="[ns.b('menu')]">
-    <slot>
-      <template v-if="options">
-        <template 
-          v-for="{ type, key, label, disabled, icon, shortcut, children }, itemKey in options" 
-          :key="itemKey"
-        >
-          <hr 
-            v-if="type === 'seperator'"
-            :class="ns.be('menu', 'seperator')"
-            role="separator"
-          >
-          <ice-dropdown-item
-            v-else-if="!children"
-            :key="key ?? itemKey"
-            :label="label"
-            :disabled="disabled"
-            :icon="icon"
-            :shortcut="shortcut"
-            :children="children"
+  <ul v-if="options" :class="[ns.b('menu')]">
+    <template 
+      v-for="{ type, key, label, disabled, icon, shortcut, children }, itemKey in options" 
+      :key="itemKey"
+    >
+      <hr 
+        v-if="type === 'seperator'"
+        :class="ns.be('menu', 'seperator')"
+        role="separator"
+      >
+      <ice-dropdown-item
+        v-else-if="!children"
+        :key="key ?? itemKey"
+        :label="label"
+        :disabled="disabled"
+        :icon="icon"
+        :shortcut="shortcut"
+        :children="children"
 
-            :show-prefix="showPrefix"
-            :show-suffix="showSuffix"
-            @click="handleClick"
-          />
+        :show-prefix="showPrefix"
+        :show-suffix="showSuffix"
+        @click="handleItemClick"
+      />
 
-          <ice-dropdown 
-            v-else 
-            :options="children"
-            :show-arrow="false"
-            placement="right"
-            transition="ice-fade-in-linear"
-            @click="handleSubMenuClick"
-          >
-            <ice-dropdown-item
-              :key="key ?? itemKey"
-              :label="label"
-              :disabled="disabled"
-              :icon="icon"
-              :shortcut="shortcut"
-              :children="children"
+      <ice-dropdown 
+        v-else 
+        :options="children"
+        :show-arrow="false"
+        placement="right"
+        transition="ice-fade-in-linear"
+        @click="handleSubMenuClick"
+      >
+        <ice-dropdown-item
+          :key="key ?? itemKey"
+          :label="label"
+          :disabled="disabled"
+          :icon="icon"
+          :shortcut="shortcut"
+          :children="children"
 
-              :show-prefix="showPrefix"
-              :show-suffix="showSuffix"
-              @click="handleClick"
-            />
-          </ice-dropdown>
-        </template>
-      </template>
-    </slot>
+          :show-prefix="showPrefix"
+          :show-suffix="showSuffix"
+          @click="handleItemClick"
+        />
+      </ice-dropdown>
+    </template>
+  </ul>
+  <ul v-else :class="[ns.b('menu')]" @click="handleItemClick">
+    <slot />
   </ul>
 </template>
 
@@ -77,7 +76,7 @@ const showSuffix = computed(() => props.options?.some((option) => option.childre
 const { close } = inject(DROPDOWN_INJECTION_KEY, undefined)!
 
 // 直接包含的 DropdownItem 的点击事件
-const handleClick = () => {
+const handleItemClick = () => {
   close?.()
 }
 

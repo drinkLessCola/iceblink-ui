@@ -1,11 +1,21 @@
 import { App, defineAsyncComponent } from 'vue'
+import * as iconComponents from './components'
+// export default {
+//   install(app: App) {
+//     const iconComponents = import.meta.glob('./components/*.vue')
+//     for(const icon of Object.values(iconComponents)) {
+//       const name = (icon as any).name.match(/([^/]*)\.vue$/)
+//       if(name) {
+//         app.component(name[1], defineAsyncComponent(icon as any))
+//       }
+//     }
+//   }
+// }
+
 export default {
   install(app: App) {
-    const iconComponents = import.meta.glob('./components/*.vue')
-    console.log(iconComponents)
     for(const icon of Object.values(iconComponents)) {
-      console.log(icon)
-      app.component(icon.name, defineAsyncComponent(icon))
+      app.component(icon.name, icon)
     }
   }
 }

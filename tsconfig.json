@@ -24,7 +24,8 @@
     "skipLibCheck": true, // 跳过类库检测
     "types": [
       "unplugin-vue-macros/macros-global", 
-      "unplugin-vue-define-options"
+      "unplugin-vue-define-options/maros-global",
+      "vite/client"
     ],
     "paths": {
       "@iceblink/*": ["packages/*"]
@@ -46,4 +47,15 @@
       "path": "./tsconfig.vitest.json"
     }
   ],
+  "vueCompilerOptions": {
+    "plugins": [
+      "@vue-macros/volar/define-model",
+      "@vue-macros/volar/define-props",
+      "@vue-macros/volar/define-props-refs",
+      "@vue-macros/volar/short-vmodel",
+      "@vue-macros/volar/define-slots",
+      "@vue-macros/volar/export-props"
+    ]
+    // ...
+  }
 }

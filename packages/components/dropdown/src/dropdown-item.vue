@@ -31,11 +31,10 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, inject } from 'vue';
+import { computed } from 'vue';
 import { IceIcon } from '@iceblink/components'
 // import { DropdownOption } from './dropdown'
 import { useNamespace } from '@iceblink/hooks';
-import { DROPDOWN_INJECTION_KEY } from '@iceblink/tokens/dropdown';
 import { Arrayable, IconType, isArray } from '@iceblink/utils';
 
 defineOptions({
@@ -72,16 +71,9 @@ const props = withDefaults(
 const emits = defineEmits(['pointermove', 'pointerleave', 'click'])
 
 const ns = useNamespace('dropdown')
-const { hideOnClick, handleClick: onClose } = inject(DROPDOWN_INJECTION_KEY, undefined)!
 
-console.log(props.disabled)
 const handleClick = (evt: MouseEvent) => {
-  if(props.disabled) return
   emits('click', evt)
-
-  if(hideOnClick?.value) {
-    onClose?.()
-  }
 }
     
 const getLabel = (label: string, shortcut?: Arrayable<string>) => {

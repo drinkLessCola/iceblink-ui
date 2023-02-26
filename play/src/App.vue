@@ -72,7 +72,6 @@ const menu = [
 <template>
   <!-- <div style="height: 100px;" /> -->
   <ice-dropdown 
-    :hide-on-click="false" 
     :options="menu"
     @select="handleMenuSelect"
   >

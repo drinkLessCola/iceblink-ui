@@ -4,6 +4,7 @@
       :name="transition"
       @after-enter="onAfterEnter"
       @before-enter="onBeforeEnter"
+      @after-leave="onAfterLeave"
     >
       <ice-popper-content
         v-if="shouldRender"
@@ -57,7 +58,6 @@ defineOptions({
   inheritAttrs: false
 })
 const props = defineProps(tooltipContentProps)
-
 const { 
   id,
   controlled, 
@@ -65,7 +65,8 @@ const {
   disabled, 
   open, 
   onOpen, 
-  onClose
+  onClose,
+  onAfterHide
 } = inject(TOOLTIP_INJECTION_KEY, undefined)!
 
 const contentRef: Ref<InstanceType<typeof IcePopperContent> | null> = ref(null)
@@ -116,6 +117,9 @@ const onAfterEnter = () => {
   )
 }
 
+const onAfterLeave = () => {
+  onAfterHide?.()
+}
 // popper 关闭后，停止监听 clickOutside
 watch(
   () => unref(open),

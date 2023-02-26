@@ -1,7 +1,7 @@
 import { buildProps, definePropType, IconType } from '@iceblink/utils'
 import { Measurable } from '@iceblink/tokens'
 import { PopperColorMode, PopperRoleType } from '@iceblink/components/popper'
-export const placementType = ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end'] as const
+export const placementType = ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'right', 'left'] as const
 export const triggerType = ['hover', 'click', 'contextmenu'] as const
 
 export interface DropdownOption {

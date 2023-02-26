@@ -31,13 +31,6 @@ ul {
   padding: 4px;
   border-radius: 5px;
 
-  li {
-    width: 100%;
-  }
-  li + li {
-    margin: 0;
-  }
-
   @include e(seperator) {
     border: none;
     background-color: var(--ice-border-color);
@@ -69,10 +62,16 @@ ul {
       align-items: center;
       justify-content: center;
     }
+
     @include e(label) {
-      width: 100%;
+      display: inline-block;
+      width: fit-content;
       margin: 0 8px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
+
     @include e(suffix) {
       width: 18px;
       display: inline-flex;

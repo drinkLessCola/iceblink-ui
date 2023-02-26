@@ -8,7 +8,7 @@
       :placement="placement"
       :trigger="trigger"
       :offset="offset"
-      :fallback-placement="['bottom', 'top']"
+      :fallback-placement="fallbackPlacement"
       :gpu-acceleration="false"
       :show-arrow="showArrow"
       :show-delay="showDelay"
@@ -40,9 +40,10 @@ import { dropdownProps, dropdownEmits } from './dropdown';
 import { IceTooltip } from '@iceblink/components/tooltip'
 import { IceOnlyChild } from '@iceblink/components/slot';
 import { useNamespace } from '@iceblink/hooks';
-import { provide, ref, toRef } from 'vue'
+import { computed, provide, ref, toRef } from 'vue'
 import { DROPDOWN_INJECTION_KEY } from '@iceblink/tokens/dropdown';
 import IceDropdownMenu from './dropdown-menu.vue';
+import { Placement } from '@popperjs/core';
 
 const props = defineProps(dropdownProps)
 const emits = defineEmits(dropdownEmits)
@@ -50,11 +51,25 @@ const emits = defineEmits(dropdownEmits)
 // hideOnClick
 const ns = useNamespace('dropdown')
 const popperRef = ref()
-const handleClose = () => popperRef.value?.onClose()
-const handleClick = () => handleClose()
+const handleClose = () => {
+  popperRef.value?.onClose()
+}
+
+const handleClick = () => {
+  if(props.hideOnClick) {
+    handleClose()
+  }
+  emits('click')
+}
+
+const fallbackPlacement = computed(() => {
+  const isHorizontal = ['left', 'right'].includes(props.placement)
+  const placement =  isHorizontal ? ['right', 'left'] : ['bottom', 'top'] 
+  return placement as Placement[]
+})
 
 provide(DROPDOWN_INJECTION_KEY, {
   hideOnClick: toRef(props, 'hideOnClick'),
-  handleClick,
+  close: handleClick,
 })
 </script>

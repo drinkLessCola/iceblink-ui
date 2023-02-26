@@ -548,12 +548,6 @@ ul {
   padding: 4px;
   border-radius: 5px;
 }
-.iceDropdownMenu li {
-  width: 100%;
-}
-.iceDropdownMenu li + li {
-  margin: 0;
-}
 .iceDropdownMenu_seperator {
   border: none;
   background-color: var(--ice-border-color);
@@ -585,8 +579,12 @@ ul {
 }
 
 .iceDropdownItem_label {
-  width: 100%;
+  display: inline-block;
+  width: fit-content;
   margin: 0 8px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .iceDropdownItem_suffix {

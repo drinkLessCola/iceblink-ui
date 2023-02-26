@@ -12,5 +12,7 @@ interface TooltipInjectionContext {
   onOpen: (e?: Event) => void
   onClose: (e?: Event) => void
   onToggle: (e?: Event) => void
+  onAfterHide: (e?: Event) => void
+
 }
 export const TOOLTIP_INJECTION_KEY: InjectionKey<TooltipInjectionContext> = Symbol('tooltipInjection')

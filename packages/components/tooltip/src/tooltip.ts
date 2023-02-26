@@ -20,11 +20,6 @@ export const tooltipProps = buildProps({
   disabled: Boolean,
 })
 
-export const tooltipEmits = {
-  visibleChange: () => true,
-  click: () => true,
-}
-
 export interface IceDropdownInstance {
   onClose?: () => void,
   hideOnClick?: ComputedRef<boolean>

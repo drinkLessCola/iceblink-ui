@@ -43,7 +43,7 @@
   </ice-popper>
 </template>
 <script setup lang="ts">
-import { tooltipProps, tooltipEmits } from './tooltip'
+import { tooltipProps } from './tooltip'
 import { IcePopper, IcePopperContent, IcePopperArrow } from '@iceblink/components/popper'
 import { IceTooltipTrigger, IceTooltipContent } from '@iceblink/components/tooltip'
 import { computed, provide, readonly, ref, toRef, unref, watch } from 'vue';
@@ -53,7 +53,7 @@ import { isBoolean } from '@vueuse/core';
 import { useId } from '@iceblink/hooks';
 
 const props = defineProps(tooltipProps)
-const emits = defineEmits(tooltipEmits)
+const emits = defineEmits(['after-hide'])
 
 const contentRef = ref<InstanceType<typeof IcePopperContent> | null>(null)
 
@@ -96,7 +96,7 @@ provide(TOOLTIP_INJECTION_KEY, {
   onToggle: () => {
     unref(open) ? onClose() : onOpen()
   },
-
+  onAfterHide: () => emits('after-hide')
 })
 
 // 实现受控模式

@@ -12,7 +12,7 @@
             role="separator"
           >
           <ice-dropdown-item
-            v-else
+            v-else-if="!children"
             :key="key ?? itemKey"
             :label="label"
             :disabled="disabled"
@@ -22,7 +22,30 @@
 
             :show-prefix="showPrefix"
             :show-suffix="showSuffix"
+            @click="handleClick"
           />
+
+          <ice-dropdown 
+            v-else 
+            :options="children"
+            :show-arrow="false"
+            placement="right"
+            transition="ice-fade-in-linear"
+            @click="handleSubMenuClick"
+          >
+            <ice-dropdown-item
+              :key="key ?? itemKey"
+              :label="label"
+              :disabled="disabled"
+              :icon="icon"
+              :shortcut="shortcut"
+              :children="children"
+
+              :show-prefix="showPrefix"
+              :show-suffix="showSuffix"
+              @click="handleClick"
+            />
+          </ice-dropdown>
         </template>
       </template>
     </slot>
@@ -32,8 +55,10 @@
 <script lang="ts" setup>
 import { useNamespace } from '@iceblink/hooks';
 import IceDropdownItem from './dropdown-item.vue';
+import IceDropdown from './dropdown.vue';
 import { DropdownOption } from './dropdown';
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
+import { DROPDOWN_INJECTION_KEY } from '@iceblink/tokens/dropdown';
 
 defineOptions({
   name: 'IceDropdownMenu',
@@ -44,8 +69,20 @@ type DropdownMenu = {
 }
 
 const props = defineProps<DropdownMenu>()
+const emits = defineEmits(['pointermove', 'pointerleave', 'click'])
 const ns = useNamespace('dropdown')
 
 const showPrefix = computed(() => props.options?.some((option) => option.icon))
 const showSuffix = computed(() => props.options?.some((option) => option.children))
+const { close } = inject(DROPDOWN_INJECTION_KEY, undefined)!
+
+// 直接包含的 DropdownItem 的点击事件
+const handleClick = () => {
+  close?.()
+}
+
+// 子级 Dropdown 包含的 DropdownItem 的点击事件
+const handleSubMenuClick = () => {
+  close?.()
+}
 </script>

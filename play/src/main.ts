@@ -5,4 +5,6 @@ import App from './App.vue'
 import './assets/index.css'
 import iconComponents from '@iceblink/svg-icons/src'
 
-createApp(App).use(iconComponents).mount('#app')
+createApp(App)
+  .use(iconComponents)
+  .mount('#app')

@@ -1,23 +1,32 @@
 <template>
   <!-- :role="role"
     :tabindex="tabIndex" -->
+  
   <li
     :aria-disabled="disabled"
     :class="[
-      ns.be('menu', 'item'),
+      ns.b('item'),
       ns.is('disabled', disabled)
     ]"
     @click="handleClick"
   >
-    <ice-icon v-if="icon">
-      <component :is="icon" />
-    </ice-icon>
-    {{ labelWithShortcut }}
-    <slot />
+    <span v-if="showPrefix" :class="[ns.be('item', 'prefix')]">
+      <ice-icon v-if="icon">
+        <component :is="icon" />
+      </ice-icon>
+    </span>
 
-    <ice-icon v-if="children">
-      <component is="right-arrow" />
-    </ice-icon>
+    <span :class="ns.be('item', 'label')">
+      <slot name="default">
+        {{ labelWithShortcut }}
+      </slot>
+    </span>
+
+    <span v-if="showSuffix" :class="ns.be('item', 'suffix')">
+      <ice-icon v-if="children">
+        <component :is="'right-arrow'" />
+      </ice-icon>
+    </span>
   </li>
 </template>
 
@@ -27,18 +36,21 @@ import { IceIcon } from '@iceblink/components'
 // import { DropdownOption } from './dropdown'
 import { useNamespace } from '@iceblink/hooks';
 import { DROPDOWN_INJECTION_KEY } from '@iceblink/tokens/dropdown';
-import { Arrayable, IconPropType, isArray } from '@iceblink/utils';
+import { Arrayable, IconType, isArray } from '@iceblink/utils';
 
 defineOptions({
   name: 'IceDropdownItem'
 })
 
 interface DropdownOption {
+  type?: string
   label?: string
   // eslint-disable-next-line vue/no-reserved-props
   key?: string | number
   shortcut?: string | string[]
-  icon?: typeof IconPropType
+  icon?: IconType
+  showPrefix?: boolean,
+  showSuffix?: boolean,
   disabled?: boolean
   children?: DropdownOption[]
 }
@@ -46,10 +58,13 @@ interface DropdownOption {
 const props = withDefaults(
   defineProps<DropdownOption>(),  
   {
+    type: 'option',
     label: '',
     shortcut: '',
     key: '',
     icon: undefined,
+    showPrefix: false,
+    showSuffix: false,
     disabled: false,
     children: undefined
   }

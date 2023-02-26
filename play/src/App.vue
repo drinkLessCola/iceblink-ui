@@ -1,29 +1,24 @@
 <script setup lang="ts">
-import { IceButton, IceDropdown, IceDropdownMenu, IceDropdownItem } from  '@iceblink/components'
-
+import { IceButton, IceDropdown, IceDropdownMenu, IceDropdownItem, IceIcon } from  '@iceblink/components'
 const handleMenuSelect = (e: Event, key: string) => {
   console.log(e, key)
 }
 const menu = [
-  // groupA
-  [
-    { label: '查看评论', key: 'comment', disabled: true },
-    { label: '播放',  key: 'play', shortcut: 'Enter'},
-    { label: '下一首播放', key: 'playAfter' },
-  ], 
-  // groupB
-  [
-    { 
-      label: '收藏到歌单',
-      key: 'collect', 
-      children: [
-        { label: '歌单 1', key: 'list 1' },
-        { label: '歌单 2', key: 'list 2' },
-        { label: '歌单 3', key: 'list 3' },
-      ] 
-    },
-    { label: '分享', key: 'share' },
-  ]
+  { label: '查看评论', key: 'comment' },
+  { label: '播放',  key: 'play', shortcut: 'Enter', icon: 'Flower' },
+  { label: '下一首播放', key: 'playAfter' },
+  { type: 'seperator' },
+  { 
+    label: '收藏到歌单',
+    key: 'collect', 
+    children: [
+      { label: '歌单 1', key: 'list 1' },
+      { label: '歌单 2', key: 'list 2' },
+      { type: 'seperator' },
+      { label: '歌单 3', key: 'list 3' },
+    ] 
+  },
+  { label: '分享', key: 'share', disabled: true },
 ]
  
 // const tooltipVisible:Ref<boolean> = ref(false)
@@ -84,7 +79,9 @@ const menu = [
     <ice-button>点击 Option 不会关闭</ice-button>
   </ice-dropdown>
 
-
+  <ice-icon>
+    <right-arrow />
+  </ice-icon>
   <ice-dropdown>
     <ice-button>选一个好地方</ice-button>
     <template #dropdown>

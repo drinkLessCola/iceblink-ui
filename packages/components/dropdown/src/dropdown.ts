@@ -1,26 +1,22 @@
-import { buildProps, definePropType, IconPropType } from '@iceblink/utils'
+import { buildProps, definePropType, IconType } from '@iceblink/utils'
 import { Measurable } from '@iceblink/tokens'
 import { PopperColorMode, PopperRoleType } from '@iceblink/components/popper'
 export const placementType = ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end'] as const
 export const triggerType = ['hover', 'click', 'contextmenu'] as const
 
-interface DropdownOption {
+export interface DropdownOption {
+  type?: string
   label?: string
   key?: string | number
   shortcut?: string | string[]
-  icon?: typeof IconPropType
+  icon?: IconType
   disabled?: boolean
   children?: DropdownOption[]
 }
 
-export type DropdownGroup = Array<DropdownOption>
-export type DropdownMenu = {
-  options?: DropdownGroup[]
-}
-
 export const dropdownProps = buildProps({
   options: {
-    type: definePropType<DropdownGroup[]>(Array),
+    type: definePropType<DropdownOption[]>(Array),
   },
   size: String, // 整合一下 button 的 size
   /** @description 菜单的最大高度 */
@@ -89,5 +85,6 @@ export const dropdownEmits = {
   click: () => true,
 }
 
-
-
+// const option = { label: '分享', key: 'share', disabled: true }
+// type B = typeof option
+// type A = B extends DropdownOption? true : false

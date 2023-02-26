@@ -2,25 +2,27 @@
   <ul :class="[ns.b('menu')]">
     <slot>
       <template v-if="options">
-        <template v-for="optionGroup, groupKey in options" :key="groupKey">
+        <template 
+          v-for="{ type, key, label, disabled, icon, shortcut, children }, itemKey in options" 
+          :key="itemKey"
+        >
           <hr 
-            v-if="groupKey"
-            :class="ns.bem('menu', 'item', 'divided')"
+            v-if="type === 'seperator'"
+            :class="ns.be('menu', 'seperator')"
             role="separator"
           >
-          <li :class="ns.b('group')">
-            <ul>
-              <ice-dropdown-item 
-                v-for="{ key, disabled = false, children, label, icon, shortcut }, itemKey in optionGroup"
-                :key="key ?? itemKey"
-                :label="label"
-                :disabled="disabled"
-                :icon="icon"
-                :shortcut="shortcut"
-                :children="children"
-              />
-            </ul>
-          </li>
+          <ice-dropdown-item
+            v-else
+            :key="key ?? itemKey"
+            :label="label"
+            :disabled="disabled"
+            :icon="icon"
+            :shortcut="shortcut"
+            :children="children"
+
+            :show-prefix="showPrefix"
+            :show-suffix="showSuffix"
+          />
         </template>
       </template>
     </slot>
@@ -30,17 +32,20 @@
 <script lang="ts" setup>
 import { useNamespace } from '@iceblink/hooks';
 import IceDropdownItem from './dropdown-item.vue';
-import { DropdownGroup } from './dropdown';
+import { DropdownOption } from './dropdown';
+import { computed } from 'vue';
 
 defineOptions({
   name: 'IceDropdownMenu',
 })
 
 type DropdownMenu = {
-  options?: DropdownGroup[]
+  options?: DropdownOption[]
 }
 
 const props = defineProps<DropdownMenu>()
 const ns = useNamespace('dropdown')
 
+const showPrefix = computed(() => props.options?.some((option) => option.icon))
+const showSuffix = computed(() => props.options?.some((option) => option.children))
 </script>

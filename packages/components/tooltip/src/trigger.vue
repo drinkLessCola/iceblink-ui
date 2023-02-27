@@ -31,7 +31,7 @@ defineOptions({
 const props = defineProps(tooltipTriggerProps)
 
 const ns = useNamespace('tooltip')
-const { id, onOpen, onClose, onToggle, trigger, disabled, controlled } = inject(TOOLTIP_INJECTION_KEY, undefined)!
+const { id, open, onOpen, onClose, onToggle, trigger, disabled, controlled } = inject(TOOLTIP_INJECTION_KEY, undefined)!
 
 // EventHandler
 const stopWhenDisabledOrControlled = (e?: Event) => {

@@ -1,16 +1,31 @@
 @use './mixins/mixins.scss' as *;
+@use './mixins/_var' as *;
 @use './mixins/function' as *;
 @use './mixins/config' as *;
+
 @include b(dropdown) {
+
   display: inline-flex;
   position: relative;
 
   // .iceDropdown_popper
   @include e(popper) {
+    @include css-var-from-global('seperator-color', 'border-color');
+    @include css-var-from-global('hover-bg-color', ('color-primary', 'light-9'));
+    @include css-var-from-global('hover-text-color', ('color-primary'));
     .#{$namespace}DropdownMenu {
       border: none;
     }
+
+    @include when(dark) {
+      @include css-var-from-global('seperator-color', ('text-color', 'regular'));
+      @include css-var-from-global('hover-bg-color', ('text-color', 'hover'));
+      @include css-var-from-global('hover-text-color', ('color-primary', 'light-1'));
+
+    }
   }
+
+  
 }
 
 
@@ -26,66 +41,68 @@ ul {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
 
   padding: 4px;
   border-radius: 5px;
 
   @include e(seperator) {
     border: none;
-    background-color: var(--ice-border-color);
+    background-color: getCssVar('seperator-color');
     width: 100%;
     height: 1px;
     margin: 3px 0;
   }
 }
 
-  // .iceDropdownItem
-  @include b(dropdownItem) {
-    display:flex;
-    width: 100%;
-    padding: 6px 6px;
-    justify-content: left;
-    align-items: center;
-    color: #555;
-    font-size: 14px;
-    box-sizing: border-box;
-    &:hover {
-      background-color: var(--ice-color-primary-light-9);
-      color: var(--ice-color-primary);
-      cursor: pointer;
-    }
-
-    @include e(prefix) {
-      width: 18px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    @include e(label) {
-      display: inline-block;
-      width: fit-content;
-      margin: 0 8px;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
-    }
-
-    @include e(suffix) {
-      width: 18px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    @include when(disabled) {
-      color: #bbb;
-      &:hover {
-        background-color: #fff;
-        cursor: not-allowed;
-      }
-    }
 
 
+
+// .iceDropdownItem
+@include b(dropdownItem) {
+  display:flex;
+  width: 100%;
+  padding: 6px 6px;
+  justify-content: left;
+  align-items: center;
+  border-radius: 3px;
+  font-size: 14px;
+  box-sizing: border-box;
+  &:hover {
+    background-color: getCssVar('hover-bg-color');
+    color: getCssVar('hover-text-color');
+    cursor: pointer;
   }
+
+  @include e(prefix) {
+    width: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @include e(label) {
+    display: inline-block;
+    width: fit-content;
+    margin: 0 8px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  @include e(suffix) {
+    width: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @include when(disabled) {
+    color: getCssVar('text-color', 'disabled');
+    &:hover {
+      background-color: inherit;
+      cursor: not-allowed;
+    }
+  }
+}
+
+

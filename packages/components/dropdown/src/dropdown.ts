@@ -35,6 +35,7 @@ export const dropdownProps = buildProps({
     values: triggerType,
     default: 'hover'
   },
+  /** @description 与触发器的距离 */
   offset: Number,
   showArrow: {
     type: Boolean,
@@ -57,7 +58,7 @@ export const dropdownProps = buildProps({
     type: definePropType<PopperRoleType>(String),
     default: 'menu'
   },
-  tabindex: {
+  tabindex: { // TODO
     type: Number,
     default: 0
   },
@@ -71,12 +72,15 @@ export const dropdownProps = buildProps({
   },
   /** @description 是否使用虚拟触发 */
   virtualTriggering: Boolean,
-  colorMode: {
+  colorMode: { 
     type: definePropType<PopperColorMode>(String),
     default: 'light'
   },
   transition: String,
-  teleported: Boolean,
+  teleported: {
+    type: Boolean,
+    default: true
+  },
 })
 
 

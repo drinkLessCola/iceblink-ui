@@ -2,8 +2,18 @@
   display: inline-flex;
   position: relative;
 }
+.iceDropdown_popper {
+  --ice-seperator-color: var(--ice-border-color);
+  --ice-hover-bg-color: var(--ice-color-primary-light-9);
+  --ice-hover-text-color: var(--ice-color-primary);
+}
 .iceDropdown_popper .iceDropdownMenu {
   border: none;
+}
+.iceDropdown_popper.is-dark {
+  --ice-seperator-color: var(--ice-text-color-regular);
+  --ice-hover-bg-color: var(--ice-text-color-hover);
+  --ice-hover-text-color: var(--ice-color-primary-light-1);
 }
 
 ul {
@@ -18,13 +28,12 @@ ul {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
   padding: 4px;
   border-radius: 5px;
 }
 .iceDropdownMenu_seperator {
   border: none;
-  background-color: var(--ice-border-color);
+  background-color: var(--ice-seperator-color);
   width: 100%;
   height: 1px;
   margin: 3px 0;
@@ -36,13 +45,13 @@ ul {
   padding: 6px 6px;
   justify-content: left;
   align-items: center;
-  color: #555;
+  border-radius: 3px;
   font-size: 14px;
   box-sizing: border-box;
 }
 .iceDropdownItem:hover {
-  background-color: var(--ice-color-primary-light-9);
-  color: var(--ice-color-primary);
+  background-color: var(--ice-hover-bg-color);
+  color: var(--ice-hover-text-color);
   cursor: pointer;
 }
 .iceDropdownItem_prefix {
@@ -69,10 +78,10 @@ ul {
 }
 
 .iceDropdownItem.is-disabled {
-  color: #bbb;
+  color: var(--ice-text-color-disabled);
 }
 .iceDropdownItem.is-disabled:hover {
-  background-color: #fff;
+  background-color: inherit;
   cursor: not-allowed;
 }
 

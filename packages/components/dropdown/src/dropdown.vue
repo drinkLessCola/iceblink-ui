@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="ns.b()">
     <ice-tooltip
       ref="popperRef"
       :virtual-ref="virtualRef"
@@ -71,5 +71,7 @@ const fallbackPlacement = computed(() => {
 provide(DROPDOWN_INJECTION_KEY, {
   hideOnClick: toRef(props, 'hideOnClick'),
   close: handleClick,
+  role: toRef(props, 'role'),
+  colorMode: toRef(props, 'colorMode')
 })
 </script>

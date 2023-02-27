@@ -62,6 +62,7 @@ const ariaDescribedby = computed(() => {
 
 // 元素展开状态 "true" | "false"
 const ariaExpanded = computed(() => {
+  console.log(props.open)
   return ariaHaspopup.value ? `${props.open}` : undefined
 })
 

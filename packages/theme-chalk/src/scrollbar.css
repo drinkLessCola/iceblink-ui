@@ -1,0 +1,48 @@
+.iceScrollbar {
+  position: relative;
+  overflow: hidden;
+}
+.iceScrollbar_wrap {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
+  vertical-align: middle;
+  scrollbar-width: none;
+}
+.iceScrollbar_wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.iceScrollbar_bar {
+  position: absolute;
+}
+.iceScrollbar_bar.is-horizontal {
+  width: calc(100% - var(--ice-thumb-size));
+  height: var(--ice-thumb-size);
+  bottom: 0;
+  left: 0;
+}
+.iceScrollbar_bar.is-horizontal > .iceScrollbar_thumb {
+  height: 100%;
+}
+
+.iceScrollbar_bar.is-vertical {
+  width: var(--ice-thumb-size);
+  height: calc(100% - var(--ice-thumb-size));
+  right: 0;
+  top: 0;
+}
+.iceScrollbar_bar.is-vertical > .iceScrollbar_thumb {
+  width: 100%;
+}
+
+.iceScrollbar_thumb {
+  position: absolute;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+}
+.iceScrollbar_thumb:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+}/*# sourceMappingURL=scrollbar.css.map */

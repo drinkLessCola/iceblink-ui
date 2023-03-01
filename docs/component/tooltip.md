@@ -1,4 +1,4 @@
-# Dropdown 下拉菜单
+# Tooltip 文字提示
 
 ## 基础用法
 
@@ -6,16 +6,37 @@
 
 ```vue
 <template>
-  <ice-dropdown>
-    <ice-button>Dropdown</ice-button>
-    <template #dropdown>
-      <ice-dropdown-menu>
-        <ice-dropdown-item disabled>Option 1</ice-dropdown-item>
-        <ice-dropdown-item divided>Option 2</ice-dropdown-item>
-        <ice-dropdown-item>Option 3</ice-dropdown-item>
-      </ice-dropdown-menu>
-    </template>
-  </ice-dropdown>
+  <ice-tooltip placement="top-start" content="tooltip">
+    <ice-button>top-start</ice-button>
+  </ice-tooltip>
+
+  <ice-tooltip placement="top" content="tooltip">
+    <ice-button>top</ice-button>
+  </ice-tooltip>
+
+  <ice-tooltip placement="top-end" content="tooltip">
+    <ice-button>top-end</ice-button>
+  </ice-tooltip>
+
+  <ice-tooltip placement="bottom-start" content="tooltip">
+    <ice-button>bottom-start</ice-button>
+  </ice-tooltip>
+
+  <ice-tooltip placement="bottom" content="tooltip">
+    <ice-button>bottom</ice-button>
+  </ice-tooltip>
+
+  <ice-tooltip placement="bottom-end" content="tooltip">
+    <ice-button>bottom-end</ice-button>
+  </ice-tooltip>
+
+  <ice-tooltip placement="left" content="tooltip">
+    <ice-button>left</ice-button>
+  </ice-tooltip>
+
+  <ice-tooltip placement="right" content="tooltip">
+    <ice-button>right</ice-button>
+  </ice-tooltip>
 </template>
 ```
 
@@ -55,7 +76,7 @@
 
 ## 触发方式
 
-使用`trigger`属性来定义如何触发下拉菜单，可以使用 `hover` | `click` | `conlabelmenu`。
+使用`trigger`属性来定义如何触发下拉菜单，可以使用 `hover` | `click` | `contextmenu`。
 :::demo
 
 ```vue
@@ -80,8 +101,8 @@
       </ice-dropdown-menu>
     </template>
   </ice-dropdown>
-  <ice-dropdown trigger="conlabelmenu">
-    <ice-button>conlabelmenu</ice-button>
+  <ice-dropdown trigger="contextmenu">
+    <ice-button>contextmenu</ice-button>
     <template #dropdown>
       <ice-dropdown-menu>
         <ice-dropdown-item>Option 1</ice-dropdown-item>
@@ -120,63 +141,12 @@
 
 :::
 
-
-## 选项以对象配置
-
-可以通过 `options` 属性传入一个对象，作为选项配置。
-```vue
-<template>
-  <ice-dropdown 
-    :options="menu"
-    @select="handleMenuSelect"
-  >
-    <ice-button>Dropdown</ice-button>
-  </ice-dropdown>
-</template>
-<script lang="ts" setup>
-const handleMenuSelect = (e: Event, key: string) => {
-  console.log(e, key)
-}
-const menu = [
-  { label: '查看评论', key: 'comment' },
-  { label: '播放',  key: 'play', shortcut: 'Enter', icon: 'Flower' },
-  { label: '下一首播放', key: 'playAfter' },
-  { type: 'seperator' },
-  { 
-    label: '收藏到歌单',
-    key: 'collect', 
-    children: [
-      { label: '歌单 1', key: 'list 1' },
-      { label: '歌单 2', key: 'list 2' },
-      { type: 'seperator' },
-      { label: '歌单 3', key: 'list 3' },
-    ] 
-  },
-  { label: '分享', key: 'share', disabled: true },
-]
-</script>
-```
-
-
-可选的对象属性有：
-
-| 属性      | 说明                                                               |
-| --------- | ----------------------------------------------------------------- |
-| type      | 类型，`seperator` 表示分割线，`option` 表示选项，默认为 `option`     |
-| label     | 选项在菜单中显示的文字                                              |
-| key       | 选项标识，作为选择事件发生时发出的参数                                |
-| shortcut  | 快捷键，可以以字符串形式或数组形式传入： `'Enter'`、 `['Ctrl', 'K']`  |
-| icon      | 选项前面的图标，接受组件名称的字符串或组件实例                        |
-| disabled  | 禁用选项                                                           |
-| children  | 选项的子菜单                                                       |
-
-
 ## Dropdown Attributes
 
 | 参数        | 说明                 | 类型    | 可选值                                                                 | 默认值 |
 | ----------- | -------------------- | ------- | ---------------------------------------------------------------------- | ------ | ----------- | --- |
 | placement   | 弹出位置             | string  | top\|top-start\|top-end\|left\|right\|bottom\|bottom-start\|bottom-end | bottom |
-| trigger     | 触发方式             | string  | hover                                                                  | click  | conlabelmenu | —   |
+| trigger     | 触发方式             | string  | hover                                                                  | click  | contextmenu | —   |
 | hideOnClick | 点击菜单项时关闭菜单 | boolean | —                                                                      | —      |
 | showTimeout | 下拉菜单打开时延     | number  | —                                                                      | 0      |
 | hideTimeout | 下拉菜单关闭时延     | number  | —                                                                      | 0      |

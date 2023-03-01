@@ -1,5 +1,5 @@
 import DefaultTheme from 'vitepress/theme'
-import { IceButton, IceIcon, IceDropdown, IceDropdownMenu, IceDropdownItem, IceTooltip } from '@iceblink/components'
+import { IceButton, IceIcon, IceDropdown, IceDropdownMenu, IceDropdownItem, IceTooltip, IceScrollbar } from '@iceblink/components'
 // 主题样式
 import 'vitepress-theme-demoblock/dist/theme/styles/index.css'
 import Demo from 'vitepress-theme-demoblock/dist/client/components/Demo.vue'
@@ -21,6 +21,7 @@ export default {
     app.component('IceTooltip', IceTooltip)
     app.component('IceDropdownMenu', IceDropdownMenu)
     app.component('IceDropdownItem', IceDropdownItem)
+    app.component('IceScrollbar', IceScrollbar)
 
   },
 }

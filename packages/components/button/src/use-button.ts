@@ -1,5 +1,6 @@
 import { ref, useSlots, type SetupContext, computed } from 'vue'
 import type { ButtonProps, ButtonEmits } from './button'
+import { useSize } from '@iceblink/hooks'
 
 export const useButton = (
   props: ButtonProps, 
@@ -11,7 +12,7 @@ export const useButton = (
   const slots = useSlots()
 
   // 获取相关配置
-  const _size = computed(() => props.size)
+  const _size = useSize()
   const _disabled = computed(() => props.disabled)
   const _type = computed(() => props.type || '')
 

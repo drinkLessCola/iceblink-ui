@@ -3,21 +3,17 @@ import { buildProps } from '@iceblink/utils'
 import { IconPropType } from '@iceblink/utils/icons'
 // import { Loading } from '@iceblink/svg-icons/src/components'
 import Loading from './loading.vue'
+import { useSizeProps } from '@iceblink/hooks/use-size'
 
 export const buttonTypes = ['default', 'primary', 'success', 'warning', 'info', 'danger'] as const
 export const buttonNativeTypes = ['button', 'submit', 'reset'] as const
 export const iconAlignTypes = ['left', 'right'] as const
 
-export const componentSizes = ['', 'default', 'small', 'large'] as const
 
 // buildProps 首先会将有 values 的属性的类型变为联合类型！
 export const buttonProps = buildProps({
   /** @description 尺寸 */
-  size: {
-    type: String,
-    values: componentSizes,
-    required: false,
-  },
+  size: useSizeProps,
   /** @description 按钮类型 */
   type: {
     type: String,

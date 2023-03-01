@@ -1,6 +1,7 @@
 import { buildProps, definePropType, IconType } from '@iceblink/utils'
 import { Measurable } from '@iceblink/tokens'
 import { PopperColorMode, PopperRoleType } from '@iceblink/components/popper'
+import { useSizeProps } from '@iceblink/hooks'
 export const placementType = ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'right', 'left'] as const
 export const triggerType = ['hover', 'click', 'contextmenu'] as const
 
@@ -18,11 +19,7 @@ export const dropdownProps = buildProps({
   options: {
     type: definePropType<DropdownOption[]>(Array),
   },
-  size: String, // 整合一下 button 的 size
-  /** @description 菜单的最大高度 */
-  // maxHeight: {
-  //   type: definePropType<string | number>([String, Number]),
-  // },
+  size: useSizeProps, // 整合一下 button 的 size
   /** @description 菜单弹出位置 */
   placement: {
     type: String,

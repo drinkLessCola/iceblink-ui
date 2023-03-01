@@ -81,6 +81,4 @@
 .icePopper[data-popper-placement^=right] > .icePopper_arrow {
   left: -4.5px;
   transform: rotate(-135deg);
-}
-
-/*# sourceMappingURL=popper.css.map */
+}/*# sourceMappingURL=popper.css.map */

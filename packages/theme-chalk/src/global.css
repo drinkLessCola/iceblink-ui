@@ -69,6 +69,7 @@
   --ice-color-info-light-8: #deeafe;
   --ice-color-info-light-9: #eef5ff;
   --ice-text-color-primary: #333;
+  --ice-text-color-hover: #444;
   --ice-text-color-regular: #666;
   --ice-text-color-secondary: #999;
   --ice-text-color-placeholder: #aaa;
@@ -80,6 +81,7 @@
   --ice-fill-color-dark: #e8e8e8;
   --ice-fill-color-darker: #e2e2e2;
   --ice-fill-color-blank: #fff;
+  --ice-border-color-light: #eee;
   --ice-border-color: #d8d8d8;
   --ice-border-color-dark: #cccccc;
   --ice-component-size-large: 38px;

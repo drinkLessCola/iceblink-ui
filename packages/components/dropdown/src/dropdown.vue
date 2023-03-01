@@ -39,7 +39,7 @@
 import { dropdownProps, dropdownEmits } from './dropdown';
 import { IceTooltip } from '@iceblink/components/tooltip'
 import { IceOnlyChild } from '@iceblink/components/slot';
-import { useNamespace } from '@iceblink/hooks';
+import { useNamespace, useSize } from '@iceblink/hooks';
 import { computed, provide, ref, toRef } from 'vue'
 import { DROPDOWN_INJECTION_KEY } from '@iceblink/tokens/dropdown';
 import IceDropdownMenu from './dropdown-menu.vue';
@@ -50,6 +50,8 @@ const emits = defineEmits(dropdownEmits)
 
 // hideOnClick
 const ns = useNamespace('dropdown')
+const dropdownSize = useSize()
+
 const popperRef = ref()
 const handleClose = () => {
   popperRef.value?.onClose()
@@ -72,6 +74,7 @@ provide(DROPDOWN_INJECTION_KEY, {
   hideOnClick: toRef(props, 'hideOnClick'),
   close: handleClick,
   role: toRef(props, 'role'),
-  colorMode: toRef(props, 'colorMode')
+  colorMode: toRef(props, 'colorMode'),
+  size: dropdownSize,
 })
 </script>

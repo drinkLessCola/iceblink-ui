@@ -102,6 +102,7 @@
   padding: 8px 15px;
   font-size: var(--ice-font-size-base);
   border-radius: var(--ice-border-radius-base);
+  --ice-icon-size: var(--ice-font-size-medium);
   /* ====== 按钮风格 ====== */
   /* ====== 按钮边框风格 ====== */
 }
@@ -129,7 +130,6 @@
 }
 
 .iceButton.is-plain {
-  font-weight: 500;
   outline-color: var(--ice-button-outline-color);
 }
 
@@ -474,16 +474,24 @@
   --ice-button-disabled-bg-color: var(--ice-color-transparent);
 }
 
+.iceButton [class*=iceIcon] + span {
+  margin-left: 6px;
+}
+.iceButton [class*=iceIcon] svg {
+  vertical-align: bottom;
+}
 .iceButton-large {
   --ice-button-height: var(--ice-component-size-large);
-  padding: 11px 19px;
-  font-size: var(--ice-font-size-base);
+  padding: 9px 19px;
+  font-size: var(--ice-font-size-medium);
   border-radius: var(--ice-border-radius-base);
+  --ice-icon-size: var(--ice-font-size-large);
 }
 
 .iceButton-small {
   --ice-button-height: var(--ice-component-size-small);
-  padding: 5px 11px;
-  font-size: 12px;
+  padding: 7px 11px;
+  font-size: var(--ice-font-size-extra-small);
   border-radius: var(--ice-border-radius-base);
+  --ice-icon-size: var(--ice-font-size-base);
 }/*# sourceMappingURL=button.css.map */

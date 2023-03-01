@@ -63,6 +63,7 @@ ul {
 
 .iceDropdownItem_label {
   display: inline-block;
+  width: -moz-fit-content;
   width: fit-content;
   margin: 0 8px;
   white-space: nowrap;
@@ -83,6 +84,4 @@ ul {
 .iceDropdownItem.is-disabled:hover {
   background-color: inherit;
   cursor: not-allowed;
-}
-
-/*# sourceMappingURL=dropdown.css.map */
+}/*# sourceMappingURL=dropdown.css.map */

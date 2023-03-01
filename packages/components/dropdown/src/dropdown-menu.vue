@@ -1,5 +1,5 @@
 <template>
-  <ul v-if="options" :class="[ns.b('menu')]" :role="role">
+  <ul v-if="options" :class="dropdownMenuClass" :role="role">
     <template 
       v-for="{ type, key, label, disabled, icon, shortcut, children }, itemKey in options" 
       :key="itemKey"
@@ -27,9 +27,10 @@
         v-else 
         :options="children"
         :show-arrow="false"
+        :teleported="false"
         :color-mode="colorMode"
         placement="right"
-        transition="ice-fade-in-linear"
+        transition="ice-zoom-in"
         @click="handleSubMenuClick"
       >
         <ice-dropdown-item
@@ -47,7 +48,7 @@
       </ice-dropdown>
     </template>
   </ul>
-  <ul v-else :class="[ns.b('menu')]" :role="role" @click="handleItemClick">
+  <ul v-else :class="dropdownMenuClass" :role="role" @click="handleItemClick">
     <slot />
   </ul>
 </template>
@@ -74,7 +75,12 @@ const ns = useNamespace('dropdown')
 
 const showPrefix = computed(() => props.options?.some((option) => option.icon))
 const showSuffix = computed(() => props.options?.some((option) => option.children))
-const { close, role, colorMode } = inject(DROPDOWN_INJECTION_KEY, undefined)!
+const { close, role, colorMode, size } = inject(DROPDOWN_INJECTION_KEY, undefined)!
+
+const dropdownMenuClass = computed(() => [
+  ns.b('menu'),
+  ns.bm('menu', size.value)
+])
 
 // 直接包含的 DropdownItem 的点击事件
 const handleItemClick = () => {
